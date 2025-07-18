@@ -1,0 +1,23 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\begin{document}
+
+$if(title)$
+\begin{center}
+    {\Huge \textbf{$title$}}\\[1em]
+    {\large $author$}\\[0.5em]
+    {\small $date$}
+\end{center}
+\vspace{2em}
+$endif$
+
+$body$
+
+\end{document}
