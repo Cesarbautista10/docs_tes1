@@ -1,48 +1,64 @@
-name: Build and Publish PDFs to docs/
+name: Build and Publish DevLab PDFs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-pdf:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    # ✅ Usar contenedor solo en esta acción
-    - name: Build PDFs using Pandoc container
-      uses: addnab/docker-run-action@v3
+    - name: Set up Python (if needed)
+      uses: actions/setup-python@v5
       with:
-        image: pandoc/latex:latest
-        options: -v ${{ github.workspace }}:/data
-        run: |
-          cd /data
-          pandoc en/content.md -o devlab_en.pdf \
-            --metadata-file=en/metadata.yaml \
-            --template=template.tex \
-            --pdf-engine=xelatex
-          pandoc es/content.md -o devlab_es.pdf \
-            --metadata-file=es/metadata.yaml \
-            --template=template.tex \
-            --pdf-engine=xelatex
+        python-version: '3.10'
 
-    - name: Move PDFs to docs/
+    - name: Install Pandoc and LaTeX
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc texlive-latex-extra texlive-fonts-recommended texlive-lang-spanish texlive-lang-english ghostscript
+
+    - name: Build DevLab PDFs (EN and ES)
+      run: |
+        pandoc en/content.md -o devlab_en.pdf \
+          --metadata-file=en/metadata.yaml \
+          --template=template.tex \
+          --pdf-engine=xelatex
+          
+        pandoc es/content.md -o devlab_es.pdf \
+          --metadata-file=es/metadata.yaml \
+          --template=template.tex \
+          --pdf-engine=xelatex
+
+    - name: Compress PDFs with Ghostscript
       run: |
         mkdir -p docs
-        mv devlab_en.pdf docs/
-        mv devlab_es.pdf docs/
+        for file in devlab_*.pdf; do
+          out="docs/$file"
+          gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer \
+             -dNOPAUSE -dQUIET -dBATCH \
+             -sOutputFile="$out" "$file"
+        done
 
-    - name: Commit and push updated PDFs
-      env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+    - name: List generated files
+      run: ls -lh docs/
+
+    - name: Commit and push PDFs to docs/ (only on main)
+      if: github.ref == 'refs/heads/main'
       run: |
-        git config user.name "${{ github.actor }}"
-        git config user.email "${{ github.actor }}@users.noreply.github.com"
-        git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
-        git add docs/
-        git commit -m "chore: update DevLab PDFs" || echo "No changes to commit"
-        git push origin HEAD:main
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git pull origin main
+        git add docs/devlab_*.pdf
+        git commit -m "Publish DevLab PDFs [skip ci]" || echo "No changes to commit"
+        git push origin main
