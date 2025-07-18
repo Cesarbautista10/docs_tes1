@@ -1,3 +1,9 @@
-title: "Módulo DevLab"
+title: "Hoja de Datos del Módulo DevLab"
+subtitle: "Especificaciones Técnicas Completas"
 author: "Equipo DevLab"
 date: "2025-07-18"
+version: "v1.0"
+organization: "DevLab Electronics"
+toc: true
+lof: true
+lot: true

@@ -1,22 +1,136 @@
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
+\documentclass[11pt,a4paper]{article}
+
+% Configuración de página y márgenes
+\usepackage[margin=1in, top=1.2in, bottom=1.2in]{geometry}
+
+% Paquetes para caracteres especiales y codificación
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Soporte para idiomas (español e inglés)
+\usepackage[spanish,english]{babel}
+
+% Paquetes para imágenes y gráficos
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Paquetes para tablas
 \usepackage{longtable}
 \usepackage{booktabs}
-\usepackage{hyperref}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{tabularx}
+
+% Control de saltos de página
+\usepackage{needspace}
+\usepackage{afterpage}
+\usepackage{placeins}
+
+% Enlaces e hipervínculos
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue]{hyperref}
+
+% Paquetes para código y verbatim
+\usepackage{fancyvrb}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Configuración de listings para código
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!50!black},
+    stringstyle=\color{red}
+}
+
+% Paquetes para mejor tipografía
+\usepackage{microtype}
+\usepackage{setspace}
+
+% Configuración de espaciado
+\onehalfspacing
+
+% Comandos personalizados
 \providecommand{\tightlist}{}
+
+% Comando para evitar viudas y huérfanas
+\widowpenalty=10000
+\clubpenalty=10000
+
+% Configuración de profundidad de numeración
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 
 \begin{document}
 
 $if(title)$
-\begin{center}
-    {\Huge \textbf{$title$}}\\[1em]
-    {\large $author$}\\[0.5em]
-    {\small $date$}
-\end{center}
-\vspace{2em}
+% Página de título
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    % Logo o imagen si existe
+    $if(logo)$
+    \includegraphics[width=0.3\textwidth]{$logo$}\\[2cm]
+    $endif$
+    
+    % Título principal
+    {\Huge \textbf{$title$}}\\[1.5em]
+    
+    % Subtítulo si existe
+    $if(subtitle)$
+    {\Large $subtitle$}\\[1em]
+    $endif$
+    
+    % Autor
+    $if(author)$
+    {\large \textit{$author$}}\\[0.5em]
+    $endif$
+    
+    % Fecha
+    $if(date)$
+    {\normalsize $date$}
+    $endif$
+    
+    \vfill
+    
+    % Información adicional al pie
+    $if(organization)$
+    {\small $organization$}\\
+    $endif$
+    $if(version)$
+    {\small Versión: $version$}
+    $endif$
+    
+\end{titlepage}
+
+% Tabla de contenidos
+$if(toc)$
+\tableofcontents
+\newpage
 $endif$
 
+% Lista de figuras (si hay imágenes)
+$if(lof)$
+\listoffigures
+\newpage
+$endif$
+
+% Lista de tablas (si hay tablas)
+$if(lot)$
+\listoftables
+\newpage
+$endif$
+
+$endif$
+
+% Contenido principal del documento
 $body$
 
 \end{document}

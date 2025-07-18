@@ -1,3 +1,9 @@
-title: "DevLab Module"
+title: "DevLab Module Datasheet"
+subtitle: "Complete Technical Specifications"
 author: "DevLab Team"
 date: "2025-07-18"
+version: "v1.0"
+organization: "DevLab Electronics"
+toc: true
+lof: true
+lot: true
