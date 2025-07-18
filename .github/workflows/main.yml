@@ -1,4 +1,4 @@
-name: Build PDF
+name: Build and Publish PDFs to docs/
 
 on:
   push:
@@ -9,26 +9,26 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    container:
-      image: pandoc/latex:latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Build English PDF
-      run: |
-        pandoc en/content.md -o devlab_en.pdf \
-          --metadata-file=en/metadata.yaml \
-          --template=template.tex \
-          --pdf-engine=xelatex
-
-    - name: Build Spanish PDF
-      run: |
-        pandoc es/content.md -o devlab_es.pdf \
-          --metadata-file=es/metadata.yaml \
-          --template=template.tex \
-          --pdf-engine=xelatex
+    # ✅ Usar contenedor solo en esta acción
+    - name: Build PDFs using Pandoc container
+      uses: addnab/docker-run-action@v3
+      with:
+        image: pandoc/latex:latest
+        options: -v ${{ github.workspace }}:/data
+        run: |
+          cd /data
+          pandoc en/content.md -o devlab_en.pdf \
+            --metadata-file=en/metadata.yaml \
+            --template=template.tex \
+            --pdf-engine=xelatex
+          pandoc es/content.md -o devlab_es.pdf \
+            --metadata-file=es/metadata.yaml \
+            --template=template.tex \
+            --pdf-engine=xelatex
 
     - name: Move PDFs to docs/
       run: |
@@ -36,10 +36,10 @@ jobs:
         mv devlab_en.pdf docs/
         mv devlab_es.pdf docs/
 
-    - name: Commit and push updated PDFs to docs/
+    - name: Commit and push updated PDFs
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add docs/
-        git commit -m "chore: update DevLab PDFs in docs/" || echo "No changes to commit"
+        git commit -m "chore: update DevLab PDFs" || echo "No changes to commit"
         git push
