@@ -9,17 +9,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    container:
+      image: pandoc/latex:latest  # ✅ Contenedor con Pandoc + TeX Live preinstalado
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install Pandoc and LaTeX
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y pandoc texlive-latex-extra
-
-    - name: Build PDF
+    - name: Build English PDF
       run: |
         pandoc en/content.md -o devlab_en.pdf \
           --metadata-file=en/metadata.yaml \
-          --template=template.tex
+          --template=template.tex \
+          --pdf-engine=xelatex
+
+    - name: Build Spanish PDF
+      run: |
+        pandoc es/content.md -o devlab_es.pdf \
+          --metadata-file=es/metadata.yaml \
+          --template=template.tex \
+          --pdf-engine=xelatex
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: DevLab PDFs
+        path: |
+          devlab_en.pdf
+          devlab_es.pdf
