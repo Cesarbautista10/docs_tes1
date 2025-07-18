@@ -279,10 +279,59 @@ class LatexDocGenerator:
         return '\n'.join(result)
     
     def escape_latex_chars(self, text: str) -> str:
-        """Escapa caracteres especiales"""
+        """Escapa caracteres especiales y emojis"""
         lines = text.split('\n')
         result = []
         in_latex_env = False
+        
+        # Replace emojis with text equivalents first
+        emoji_replacements = {
+            '⚙️': 'Technical Specifications',
+            '🔌': 'Pinout',
+            '📏': 'Dimensions', 
+            '📃': 'Topology',
+            '🚀': '',
+            '✅': '',
+            '❌': '',
+            '📊': '',
+            '🧪': '',
+            '📄': '',
+            '📚': '',
+            '🎯': '',
+            '⚡': '',
+            '🔧': '',
+            '📦': '',
+            '🌐': '',
+            '💡': '',
+            '🔥': '',
+            '⭐': '',
+            '🎉': '',
+        }
+        
+        for emoji, replacement in emoji_replacements.items():
+            text = text.replace(emoji, replacement)
+        
+        # Handle special Unicode characters
+        special_chars = {
+            'Ω': r'$\Omega$',
+            '°': r'$^{\circ}$',
+            '±': r'$\pm$',
+            'µ': r'$\mu$',
+            '≤': r'$\leq$',
+            '≥': r'$\geq$',
+            '×': r'$\times$',
+            '÷': r'$\div$',
+            '²': r'$^2$',
+            '³': r'$^3$',
+            '½': r'$\frac{1}{2}$',
+            '¼': r'$\frac{1}{4}$',
+            '¾': r'$\frac{3}{4}$',
+        }
+        
+        for char, replacement in special_chars.items():
+            text = text.replace(char, replacement)
+        
+        lines = text.split('\n')
         
         for line in lines:
             # Detectar entornos LaTeX
@@ -309,8 +358,14 @@ class LatexDocGenerator:
                 '~': '\\textasciitilde{}',
             }
             
+            # Don't escape & in table environments
+            if not ('|' in line and line.count('|') >= 2):
+                escape_chars['&'] = '\\&'
+            
             for char, replacement in escape_chars.items():
-                line = line.replace(char, replacement)
+                # Don't escape if already escaped or in math mode
+                if char not in ['$']:  # Don't double-escape math mode
+                    line = re.sub(f'(?<!\\\\){re.escape(char)}(?![^$]*\\$)', replacement, line)
             
             result.append(line)
         
@@ -354,10 +409,14 @@ class LatexDocGenerator:
             original_dir = os.getcwd()
             os.chdir(self.docs_dir)
             
+            # Crear paths relativos al directorio docs
+            tex_filename = tex_file.name
+            pdf_filename = tex_filename.replace('.tex', '.pdf')
+            
             # Compilar 3 veces para referencias cruzadas
             for i in range(3):
                 result = subprocess.run(
-                    ['pdflatex', '-interaction=nonstopmode', tex_file.name],
+                    ['pdflatex', '-interaction=nonstopmode', tex_filename],
                     capture_output=True,
                     text=True,
                     encoding='utf-8',
@@ -368,17 +427,25 @@ class LatexDocGenerator:
                     print(f"Error fatal: {result.stdout[-800:]}")
                     return False
             
-            # Verificar PDF - si existe y tiene contenido, es exitoso
-            pdf_file = tex_file.with_suffix('.pdf')
-            if pdf_file.exists() and pdf_file.stat().st_size > 1000:
-                # Limpiar archivos auxiliares
-                for ext in ['.aux', '.log', '.out', '.toc', '.lof', '.lot']:
-                    aux_file = tex_file.with_suffix(ext)
-                    if aux_file.exists():
-                        aux_file.unlink()
-                return True
+            # Verificar PDF - usando path relativo al directorio docs
+            pdf_path = Path(pdf_filename)
+            if pdf_path.exists():
+                size = pdf_path.stat().st_size
+                if size > 1000:
+                    # Limpiar archivos auxiliares opcionales
+                    for ext in ['.aux', '.out', '.toc', '.lof', '.lot']:
+                        aux_file = Path(tex_filename.replace('.tex', ext))
+                        if aux_file.exists():
+                            try:
+                                aux_file.unlink()
+                            except:
+                                pass  # No es crítico si no se pueden eliminar
+                    return True
+                else:
+                    print(f"❌ PDF demasiado pequeño: {size} bytes")
+                    return False
             else:
-                print(f"PDF no generado correctamente: {pdf_file}")
+                print(f"❌ PDF no generado")
                 return False
             
         except Exception as e:

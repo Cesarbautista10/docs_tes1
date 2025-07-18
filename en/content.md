@@ -1,168 +1,161 @@
-# DevLab Overview
+# Hardware Documentation
 
-DevLab is a compact embedded module with Wi-Fi and Bluetooth capabilities, designed for IoT applications and rapid prototyping.
+## Overview
+
+The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor with integrated environmental monitoring capabilities, designed for IoT applications and precise atmospheric measurements.
 
 ## Features
 
-- **Dual-core microcontroller** (240 MHz)
-- **Up to 27 GPIOs** configurable
-- **Integrated wireless support** (Wi-Fi & Bluetooth)
+- **ICP-10111 Pressure Sensor** (High precision)
+- **BME688 Environmental Sensor** (Temperature, humidity, gas)
 - **Low power consumption** modes
-- **Extensive peripheral support**
+- **I2C/QWIIC connectivity**
+- **Compact form factor** with castellated holes
 
-## Technical Specifications
+# Hardware
 
-![System Topology](resources/unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+## ⚙️ Technical Specifications
 
-### Processor & Memory
+### Sensor Specifications
 
 | Parameter | Value | Unit | Notes |
 |-----------|-------|------|-------|
-| CPU | Dual-core Xtensa LX6 | 240 MHz | 32-bit RISC |
-| Flash Memory | 4 MB | MB | External SPI Flash |
-| SRAM | 520 KB | KB | Internal SRAM |
-| RTC Memory | 16 KB | KB | Ultra Low Power |
+| Pressure Range | 300-1250 | hPa | Absolute pressure |
+| Pressure Accuracy | ±0.4 | hPa | At 25°C |
+| Temperature Range | -40 to +85 | °C | Operating range |
+| Humidity Range | 0-100 | %RH | Relative humidity |
+| Interface | I2C | - | QWIIC compatible |
 
 ### Power Specifications
 
 | Parameter | Min | Typ | Max | Unit | Conditions |
 |-----------|-----|-----|-----|------|------------|
-| Supply Voltage | 2.2 | 3.3 | 3.6 | V | Normal Operation |
-| Active Current | - | 160 | 260 | mA | Wi-Fi Tx @ 19.5dBm |
-| Sleep Current | - | 5 | 10 | µA | Deep Sleep Mode |
-| Standby Current | - | 240 | 350 | µA | Light Sleep Mode |
+| Supply Voltage | 3.0 | 3.3 | 5.0 | V | Normal Operation |
+| Active Current | - | 1.2 | 2.0 | mA | Continuous measurement |
+| Sleep Current | - | 0.1 | 0.5 | µA | Standby mode |
+| Regulator Output | - | 1.8 | - | V | Internal LDO |
 
-### Wireless Capabilities
+## 🔌 Pinout
 
-#### Wi-Fi Specifications
-- **Standards**: 802.11 b/g/n (2.4 GHz)
-- **Data Rate**: Up to 150 Mbps
-- **Output Power**: +19.5 dBm max
-- **Antenna**: Integrated PCB antenna
+![Pinout Diagram](unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
 
-#### Bluetooth Specifications
-- **Version**: Bluetooth v4.2 BR/EDR and BLE
-- **Output Power**: +9 dBm max
-- **Range**: Up to 100m (open field)
+| Pin Label | Function    | Notes                             |
+|-----------|-------------|-----------------------------------|
+| VCC       | Power Supply| 3.3V or 5V                       |
+| GND       | Ground      | Common ground for all components  |
+| SDA       | I2C Data    | Serial data line                  |
+| SCL       | I2C Clock   | Serial clock line                 |
 
-## GPIO Configuration
+## 📏 Dimensions
 
-![Pinout Diagram](resources/unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.png)
+![Dimensions](unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
-### Available Pins
+## 📃 Topology
 
-| Pin | Function | Voltage | Drive Current | Special Features |
-|-----|----------|---------|---------------|------------------|
-| GPIO0 | Digital I/O | 3.3V | 40 mA | Boot control |
-| GPIO1 | UART0_TXD | 3.3V | 40 mA | Default debug output |
-| GPIO2 | Digital I/O | 3.3V | 40 mA | LED control |
-| GPIO3 | UART0_RXD | 3.3V | - | Default debug input |
-| GPIO4-5 | Digital I/O | 3.3V | 40 mA | General purpose |
+![Topology](unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
-### ADC Capabilities
+| Ref. | Description                              |
+|------|------------------------------------------|
+| IC1  | ICP-10111 Barometric Pressure Sensor    |
+| IC2  | BME688 Environmental Sensor             |
+| L1   | Power On LED                             |
+| U1   | ME6206A18XG 1.8V Regulator              | 
+| JP1  | 2.54 mm Castellated Holes               |
+| J1   | QWIIC Connector (JST 1 mm pitch) for I2C |
 
-The module includes a 12-bit SAR ADC with the following characteristics:
-
-- **Resolution**: 12-bit (4096 levels)
-- **Input Range**: 0 - 3.3V
-- **Channels**: 8 channels available
-- **Sampling Rate**: Up to 2 Msps
 
 ## Communication Interfaces
 
-### UART
-- **Channels**: 3 hardware UART controllers
-- **Baud Rate**: Up to 5 Mbps
-- **Features**: Hardware flow control, DMA support
+### I2C Interface
+- **Address**: 0x63 (ICP-10111), 0x77 (BME688)
+- **Speed**: Standard (100 kHz), Fast (400 kHz)
+- **Features**: QWIIC compatible connector
+- **Pull-up Resistors**: 4.7kΩ integrated
 
-### SPI
-- **Channels**: 4 SPI controllers
-- **Speed**: Up to 80 MHz
-- **Modes**: Master/Slave operation
-- **Features**: DMA support, flexible pin mapping
-
-### I2C
-- **Channels**: 2 I2C controllers  
-- **Speed**: Standard (100 kHz), Fast (400 kHz), Fast+ (1 MHz)
-- **Features**: Multi-master support, 7/10-bit addressing
+### Digital Interface Specifications
+- **Logic Levels**: 3.3V CMOS compatible
+- **Input High**: 2.0V minimum
+- **Input Low**: 0.8V maximum
+- **Output Drive**: 4mA typical
 
 ## Physical Characteristics
-
-![Physical Dimensions](resources/unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
-
-![Top View](resources/unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png)
-
-![Bottom View](resources/unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
 ### Package Information
 
 | Parameter | Value | Unit |
 |-----------|-------|------|
-| Package Type | QFN-48 | - |
-| Dimensions | 6 x 6 x 0.9 | mm |
-| Pin Pitch | 0.4 | mm |
-| Weight | 0.5 | g |
+| Package Type | Custom PCB | - |
+| Dimensions | 25.4 x 15.24 x 3.2 | mm |
+| Mounting | Castellated holes | 2.54mm pitch |
+| Weight | 2.1 | g |
 
 ### Environmental Specifications
 
 | Parameter | Min | Max | Unit | Conditions |
 |-----------|-----|-----|------|------------|
-| Operating Temperature | -40 | +85 | °C | Commercial grade |
+| Operating Temperature | -40 | +85 | °C | Full accuracy |
 | Storage Temperature | -55 | +125 | °C | - |
-| Humidity | 10 | 95 | %RH | Non-condensing |
+| Humidity | 0 | 100 | %RH | Non-condensing |
+| Pressure Range | 300 | 1250 | hPa | Absolute pressure |
 
 ## Software Support
 
 ### Development Environment
-- **Arduino IDE**: Full support with ESP32 core
-- **ESP-IDF**: Native Espressif framework
-- **PlatformIO**: Cross-platform IDE support
-- **MicroPython**: Python support for rapid development
+- **Arduino IDE**: Full library support
+- **ESP-IDF**: Native driver integration
+- **PlatformIO**: Cross-platform support
+- **CircuitPython**: Python library available
 
 ### Key Libraries
-- WiFi & Bluetooth connectivity
-- FreeRTOS real-time operating system
-- Hardware abstraction layer (HAL)
-- Over-the-air (OTA) update support
+- ICP-10111 pressure sensor driver
+- BME688 environmental sensor library
+- I2C communication protocols
+- Data filtering and calibration
 
 ## Applications
 
-The DevLab module is ideal for:
+The ICP-10111 module is ideal for:
 
-1. **IoT Sensors & Actuators**
-   - Environmental monitoring
-   - Smart home devices
-   - Industrial automation
+1. **Weather Monitoring**
+   - Atmospheric pressure measurement
+   - Altitude determination
+   - Weather prediction systems
 
-2. **Prototyping & Development**
-   - Rapid proof-of-concept
-   - Educational projects
-   - Research applications
+2. **IoT Environmental Sensing**
+   - Smart building automation
+   - Agricultural monitoring
+   - Air quality assessment
 
-3. **Commercial Products**
-   - Smart appliances
-   - Wearable devices
-   - Connected lighting
+3. **Portable Devices**
+   - Fitness trackers
+   - Outdoor navigation devices
+   - Drone altitude control
 
-## Safety & Compliance
+## Safety and Compliance
 
 ### Certifications
-- **FCC**: Part 15.247 (USA)
-- **CE**: EN 300 328, EN 301 489 (Europe)
-- **IC**: RSS-210 (Canada)
+- **RoHS**: Compliant with EU directive
+- **REACH**: Compliant with EU regulation
+- **CE**: Electromagnetic compatibility
 
 ### Safety Features
 - **ESD Protection**: ±2kV HBM on all pins
-- **Latch-up Immunity**: ±100mA
-- **Thermal Protection**: Automatic thermal shutdown
+- **Reverse Polarity Protection**: Integrated
+- **Thermal Protection**: Operating range monitoring
+
+## References
+
+- [ICP-10111 Datasheet](https://product.tdk.com/system/files/dam/doc/product/sensor/pressure/capacitive-pressure/data_sheet/ds-000177-icp-10111-v1.3.pdf)
+- [BME688 Datasheet](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme688-ds000.pdf)
+- [ME6206 Regulator Datasheet](https://www.microne.com.cn/uploads/file/20200904/ME6206.pdf)
 
 ## Ordering Information
 
 | Part Number | Description | Package | MOQ |
 |-------------|-------------|---------|-----|
-| DEVLAB-001 | Standard Module | Tray | 100 |
-| DEVLAB-001R | RoHS Compliant | Tape & Reel | 1000 |
-| DEVLAB-DEV | Development Kit | Individual Box | 1 |
+| ICP10111-001 | Standard Module | Individual | 1 |
+| ICP10111-DEV | Development Kit | Kit Box | 1 |
+| ICP10111-BULK | Bulk Order | Tray | 100 |
 
 ## Revision History
 

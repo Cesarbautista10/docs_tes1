@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.20)  18 JUL 2025 17:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.20)  18 JUL 2025 17:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -559,7 +559,12 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count318
 \l__pdf_internal_box=\box112
 )
-(./datasheet_es.aux)
+(./datasheet_es.aux
+
+LaTeX Warning: Label `fig:es-unit-dimension-v-1-0-0-icp10111-barometric-pressur
+e-sensor-png' multiply defined.
+
+)
 \openout1 = `datasheet_es.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 70.
@@ -705,145 +710,137 @@ l.92 \end{titlepage}
 Things are pretty mixed up, but I think the worst is over.
 
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
-13.
+15.
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-! Misplaced alignment tab character &.
-l.115 ...{Soporte inalámbrico integrado} (Wi-Fi &
-                                                   Bluetooth)
-I can't figure out why you would want to use a tab mark
-here. If you just want an ampersand, the remedy is
-simple: Just type `I\&' now. But if some right brace
-up above has ended a previous alignment prematurely,
-you're probably due for more error messages, and you
-might try typing `S' now just to see what is salvageable.
-
-<es_unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=115, 826.
-5279pt x 858.5676pt>
-File: es_unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png Graphic 
-file (type png)
-<use es_unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png>
-Package pdftex.def Info: es_unit_topology_v_1_0_0_icp10111_barometric_pressure_
-sensor.png  used on input line 125.
-(pdftex.def)             Requested size: 317.07614pt x 329.37703pt.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-38.
+32.
+
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-38.
+32.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-138.
+132.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-138.
+132.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 138.
+(Font)              <10> on input line 132.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 138.
+(Font)              <7> on input line 132.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 138.
+(Font)              <5> on input line 132.
+
+! Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.140 Interfaz & I2C &
+                       - & Compatible QWIIC \\
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+<es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg, id=1
+63, 526.1256pt x 704.8734pt>
+File: es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg 
+Graphic file (type jpg)
+<use es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg>
+Package pdftex.def Info: es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pres
+sure_sensor_en.jpg  used on input line 172.
+(pdftex.def)             Requested size: 407.66833pt x 546.19595pt.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.150 
-       [1{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc} <./es_unit_topology_v
-_1_0_0_icp10111_barometric_pressure_sensor.png>]
-<es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_es.png, id=1
-24, 526.1256pt x 704.8734pt>
-File: es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_es.png 
-Graphic file (type png)
-<use es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_es.png>
-Package pdftex.def Info: es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pres
-sure_sensor_es.png  used on input line 194.
-(pdftex.def)             Requested size: 407.66833pt x 546.19595pt.
- [2]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.212 GPIO1 & UART0_
-                    TXD & 3.3V & 40 mA & Salida debug por defecto \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.212 GPIO1 & UART0_TXD &
-                          3.3V & 40 mA & Salida debug por defecto \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.214 GPIO3 & UART0_
-                    RXD & 3.3V & - & Entrada debug por defecto \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.214 GPIO3 & UART0_RXD &
-                          3.3V & - & Entrada debug por defecto \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-[3 <./es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_es.png>
-]
-<es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=139, 942
+l.176 
+       [1{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf/font
+s/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc
+}] [2 <./es_unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.j
+pg>]
+<es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=179, 942
 .8826pt x 879.5259pt>
 File: es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png Graphic
  file (type png)
 <use es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png>
 Package pdftex.def Info: es_unit_dimension_v_1_0_0_icp10111_barometric_pressure
-_sensor.png  used on input line 262.
+_sensor.png  used on input line 202.
 (pdftex.def)             Requested size: 271.7835pt x 253.51262pt.
- [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}]
-<es_unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=147, 896.34875
+<es_unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=181, 826.
+5279pt x 858.5676pt>
+File: es_unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png Graphic 
+file (type png)
+<use es_unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png>
+Package pdftex.def Info: es_unit_topology_v_1_0_0_icp10111_barometric_pressure_
+sensor.png  used on input line 214.
+(pdftex.def)             Requested size: 317.07614pt x 329.37703pt.
+ [3 <./es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 248.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 248.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 248.
+
+[4{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} <./es_unit_topology_v_1_0_0_i
+cp10111_barometric_pressure_sensor.png>]
+! Extra alignment tab has been changed to \cr.
+<recently read> \endtemplate 
+                             
+l.294 Rango de Presión & 300 &
+                                1250 & hPa & Presión absoluta \\
+You have given more \span or & marks than there were
+in the preamble to the \halign or \valign now in progress.
+So I'll assume that you meant to type \cr instead.
+
+
+Overfull \hbox (5.06985pt too wide) in paragraph at lines 287--297
+ [][] 
+ []
+
+[5] [6]
+File: es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png Graphic
+ file (type png)
+<use es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png>
+Package pdftex.def Info: es_unit_dimension_v_1_0_0_icp10111_barometric_pressure
+_sensor.png  used on input line 398.
+(pdftex.def)             Requested size: 271.7835pt x 253.51262pt.
+<es_unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=215, 896.34875
 pt x 705.63625pt>
 File: es_unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png Graphic file 
 (type png)
 <use es_unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png>
 Package pdftex.def Info: es_unit_top_v_1_0_0_icp10111_barometric_pressure_senso
-r.png  used on input line 272.
+r.png  used on input line 408.
 (pdftex.def)             Requested size: 317.07614pt x 249.60356pt.
-<es_unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=148, 1927.2pt 
+ [7]
+<es_unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png, id=222, 1927.2pt 
 x 1084.05pt>
 File: es_unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png Graphic file 
 (type png)
 <use es_unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png>
 Package pdftex.def Info: es_unit_btm_v_1_0_0_icp10111_barometric_pressure_senso
-r.png  used on input line 282.
+r.png  used on input line 418.
 (pdftex.def)             Requested size: 317.07614pt x 178.34775pt.
- [5 <./es_unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png> <./es
-_unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png>]
+
 ! Misplaced \noalign.
 <recently read> \noalign 
                          
-l.322 \hline
+l.458 \hline
             
 I expect to see \noalign only after the \cr of
 an alignment. Proceed, and I'll ignore this case.
@@ -851,7 +848,7 @@ an alignment. Proceed, and I'll ignore this case.
 ! You can't use `\hrule' here except with leaders.
 \hline ->\noalign {\ifnum 0=`}\fi \hrule 
                                          \@height \arrayrulewidth \futurelet...
-l.322 \hline
+l.458 \hline
             
 To put a horizontal rule in an hbox or an alignment,
 you should use \leaders or \hrulefill (see The TeXbook).
@@ -859,7 +856,7 @@ you should use \leaders or \hrulefill (see The TeXbook).
 ! Missing number, treated as zero.
 <to be read again> 
                    \futurelet 
-l.322 \hline
+l.458 \hline
             
 A number should have been here; I inserted `0'.
 (If you can't figure out why I needed to see a number,
@@ -868,7 +865,7 @@ look up `weird error' in the index to The TeXbook.)
 ! Illegal unit of measure (pt inserted).
 <to be read again> 
                    \futurelet 
-l.322 \hline
+l.458 \hline
             
 Dimensions can be in units of em, ex, in, pt, pc,
 cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
@@ -877,8 +874,10 @@ To recover gracefully from this error, it's best to
 delete the erroneous units; e.g., type `2' to delete
 two letters. (See Chapter 27 of The TeXbook.)
 
+[8 <./es_unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png> <./es_unit_b
+tm_v_1_0_0_icp10111_barometric_pressure_sensor.png>]
 ! Misplaced alignment tab character &.
-l.340 \item Conectividad WiFi &
+l.476 \item Conectividad WiFi &
                                 Bluetooth
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -887,46 +886,50 @@ up above has ended a previous alignment prematurely,
 you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
-[6 <./es_unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png>]
+[9]
 ! Extra alignment tab has been changed to \cr.
 <recently read> \endtemplate 
                              
-l.404 ...AB-001R & Compatible RoHS & Tape & Reel &
+l.540 ...AB-001R & Compatible RoHS & Tape & Reel &
                                                    1000 \\
 You have given more \span or & marks than there were
 in the preamble to the \halign or \valign now in progress.
 So I'll assume that you meant to type \cr instead.
 
-[7]
-<es_Schematics_icon.jpg, id=173, 1065.9825pt x 879.285pt>
+<es_Schematics_icon.jpg, id=238, 1065.9825pt x 879.285pt>
 File: es_Schematics_icon.jpg Graphic file (type jpg)
 <use es_Schematics_icon.jpg>
-Package pdftex.def Info: es_Schematics_icon.jpg  used on input line 434.
+Package pdftex.def Info: es_Schematics_icon.jpg  used on input line 570.
 (pdftex.def)             Requested size: 452.9679pt x 373.63081pt.
- [8 <./es_Schematics_icon.jpg>] [9] (./datasheet_es.aux)
+[10] [11 <./es_Schematics_icon.jpg>] (./datasheet_es.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `datasheet_es.out' has not changed.
-(rerunfilecheck)             Checksum: F38F17CA801301D9CABA43213EFFF4C8;4312.
+(rerunfilecheck)             Checksum: E9769B2EF0CC48EC2FA66EC7C805D24F;6853.
  ) 
 Here is how much of TeX's memory you used:
- 16999 strings out of 474222
- 278216 string characters out of 5748733
+ 17068 strings out of 474222
+ 279259 string characters out of 5748733
  1934975 words of memory out of 5000000
- 38918 multiletter control sequences out of 15000+600000
- 604899 words of font info for 91 fonts, out of 8000000 for 9000
+ 38949 multiletter control sequences out of 15000+600000
+ 615758 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,1009b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,10n,79p,1009b,542s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.pfb>
-Output written on datasheet_es.pdf (10 pages, 1438363 bytes).
+sr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmsy7.pfb>
+Output written on datasheet_es.pdf (12 pages, 2217524 bytes).
 PDF statistics:
- 232 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
- 54 named destinations out of 1000 (max. 500000)
- 30959 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 312 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 35151 words of extra memory for PDF output out of 35830 (max. 10000000)
 

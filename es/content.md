@@ -1,90 +1,159 @@
-# Introducción a DevLab
+# Documentación de Hardware
 
-DevLab es un módulo embebido compacto con capacidades de Wi-Fi y Bluetooth, diseñado para aplicaciones IoT y prototipado rápido.
+## Descripción General
+
+El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental compacto con capacidades integradas de monitoreo ambiental, diseñado para aplicaciones IoT y mediciones atmosféricas precisas.
 
 ## Características Principales
 
-- **Microcontrolador de doble núcleo** (240 MHz)
-- **Hasta 27 GPIOs** configurables
-- **Soporte inalámbrico integrado** (Wi-Fi & Bluetooth)
+- **Sensor de presión ICP-10111** (Alta precisión)
+- **Sensor ambiental BME688** (Temperatura, humedad, gas)
 - **Modos de bajo consumo** energético
-- **Amplio soporte de periféricos**
+- **Conectividad I2C/QWIIC**
+- **Factor de forma compacto** con orificios castellanos
 
-## Especificaciones Técnicas
+# Hardware
 
-![Topología del Sistema](resources/unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+## ⚙️ Especificaciones Técnicas
 
-### Procesador y Memoria
+### Especificaciones del Sensor
 
 | Parámetro | Valor | Unidad | Notas |
 |-----------|-------|--------|-------|
-| CPU | Dual-core Xtensa LX6 | 240 MHz | RISC de 32-bit |
-| Memoria Flash | 4 MB | MB | SPI Flash externa |
-| SRAM | 520 KB | KB | SRAM interna |
-| Memoria RTC | 16 KB | KB | Ultra Bajo Consumo |
+| Rango de Presión | 300-1250 | hPa | Presión absoluta |
+| Precisión de Presión | ±0.4 | hPa | A 25°C |
+| Rango de Temperatura | -40 a +85 | °C | Rango de operación |
+| Rango de Humedad | 0-100 | %RH | Humedad relativa |
+| Interfaz | I2C | - | Compatible QWIIC |
 
 ### Especificaciones de Alimentación
 
 | Parámetro | Mín | Típ | Máx | Unidad | Condiciones |
 |-----------|-----|-----|-----|--------|-------------|
-| Voltaje de Alimentación | 2.2 | 3.3 | 3.6 | V | Operación Normal |
-| Corriente Activa | - | 160 | 260 | mA | Wi-Fi Tx @ 19.5dBm |
-| Corriente en Reposo | - | 5 | 10 | µA | Modo Sleep Profundo |
-| Corriente Standby | - | 240 | 350 | µA | Modo Light Sleep |
+| Voltaje de Alimentación | 3.0 | 3.3 | 5.0 | V | Operación Normal |
+| Corriente Activa | - | 1.2 | 2.0 | mA | Medición continua |
+| Corriente en Reposo | - | 0.1 | 0.5 | µA | Modo standby |
+| Salida del Regulador | - | 1.8 | - | V | LDO interno |
 
-### Capacidades Inalámbricas
+## 🔌 Distribución de Pines
 
-#### Especificaciones Wi-Fi
-- **Estándares**: 802.11 b/g/n (2.4 GHz)
-- **Velocidad de Datos**: Hasta 150 Mbps
-- **Potencia de Salida**: +19.5 dBm máx
-- **Antena**: Antena PCB integrada
+![Diagrama de Pines](unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
 
-#### Especificaciones Bluetooth
-- **Versión**: Bluetooth v4.2 BR/EDR y BLE
-- **Potencia de Salida**: +9 dBm máx
-- **Alcance**: Hasta 100m (campo abierto)
+| Etiqueta | Función | Notas |
+|----------|---------|-------|
+| VCC | Alimentación | 3.3V o 5V |
+| GND | Tierra | Tierra común para todos los componentes |
+| SDA | Datos I2C | Línea de datos serie |
+| SCL | Reloj I2C | Línea de reloj serie |
 
-## Configuración GPIO
+## 📏 Dimensiones
 
-![Diagrama de Pines](resources/unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_es.png)
+![Dimensiones](unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
-### Pines Disponibles
+## 📃 Topología
 
-| Pin | Función | Voltaje | Corriente | Características Especiales |
-|-----|---------|---------|-----------|----------------------------|
-| GPIO0 | E/S Digital | 3.3V | 40 mA | Control de arranque |
-| GPIO1 | UART0_TXD | 3.3V | 40 mA | Salida debug por defecto |
-| GPIO2 | E/S Digital | 3.3V | 40 mA | Control de LED |
-| GPIO3 | UART0_RXD | 3.3V | - | Entrada debug por defecto |
-| GPIO4-5 | E/S Digital | 3.3V | 40 mA | Propósito general |
+![Topología](unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
-### Capacidades ADC
-
-El módulo incluye un ADC SAR de 12-bit con las siguientes características:
-
-- **Resolución**: 12-bit (4096 niveles)
-- **Rango de Entrada**: 0 - 3.3V
-- **Canales**: 8 canales disponibles
-- **Velocidad de Muestreo**: Hasta 2 Msps
-
+| Ref. | Descripción |
+|------|-------------|
+| IC1 | Sensor de Presión Barométrica ICP-10111 |
+| IC2 | Sensor Ambiental BME688 |
+| L1 | LED de Encendido |
+| U1 | Regulador ME6206A18XG 1.8V | 
+| JP1 | Orificios Castellanos de 2.54 mm |
+| J1 | Conector QWIIC (JST paso 1 mm) para I2C |
 ## Interfaces de Comunicación
 
-### UART
-- **Canales**: 3 controladores UART por hardware
-- **Velocidad**: Hasta 5 Mbps
-- **Características**: Control de flujo por hardware, soporte DMA
+### Interfaz I2C
+- **Dirección**: 0x63 (ICP-10111), 0x77 (BME688)
+- **Velocidad**: Estándar (100 kHz), Rápido (400 kHz)
+- **Características**: Conector compatible QWIIC
+- **Resistencias Pull-up**: 4.7kΩ integradas
 
-### SPI
-- **Canales**: 4 controladores SPI
-- **Velocidad**: Hasta 80 MHz
-- **Modos**: Operación Maestro/Esclavo
-- **Características**: Soporte DMA, mapeo flexible de pines
+### Especificaciones de Interfaz Digital
+- **Niveles Lógicos**: Compatible CMOS 3.3V
+- **Entrada Alta**: 2.0V mínimo
+- **Entrada Baja**: 0.8V máximo
+- **Corriente de Salida**: 4mA típico
 
-### I2C
-- **Canales**: 2 controladores I2C
-- **Velocidad**: Estándar (100 kHz), Rápido (400 kHz), Rápido+ (1 MHz)
-- **Características**: Soporte multi-maestro, direccionamiento 7/10-bit
+## Características Físicas
+
+### Información del Encapsulado
+
+| Parámetro | Valor | Unidad |
+|-----------|-------|--------|
+| Tipo de Encapsulado | PCB Personalizado | - |
+| Dimensiones | 25.4 x 15.24 x 3.2 | mm |
+| Montaje | Orificios castellanos | Paso 2.54mm |
+| Peso | 2.1 | g |
+
+### Especificaciones Ambientales
+
+| Parámetro | Mín | Máx | Unidad | Condiciones |
+|-----------|-----|-----|--------|-------------|
+| Temperatura de Operación | -40 | +85 | °C | Precisión completa |
+| Temperatura de Almacenamiento | -55 | +125 | °C | - |
+| Humedad | 0 | 100 | %HR | Sin condensación |
+| Rango de Presión | 300 | 1250 | hPa | Presión absoluta |
+
+## Soporte de Software
+
+### Entorno de Desarrollo
+- **Arduino IDE**: Soporte completo de librería
+- **ESP-IDF**: Integración de driver nativo
+- **PlatformIO**: Soporte multiplataforma
+- **CircuitPython**: Librería Python disponible
+
+### Librerías Principales
+- Driver del sensor de presión ICP-10111
+- Librería del sensor ambiental BME688
+- Protocolos de comunicación I2C
+- Filtrado y calibración de datos
+
+## Aplicaciones
+
+El módulo ICP-10111 es ideal para:
+
+1. **Monitoreo Meteorológico**
+   - Medición de presión atmosférica
+   - Determinación de altitud
+   - Sistemas de predicción meteorológica
+
+2. **Sensores Ambientales IoT**
+   - Automatización de edificios inteligentes
+   - Monitoreo agrícola
+   - Evaluación de calidad del aire
+
+3. **Dispositivos Portátiles**
+   - Rastreadores de fitness
+   - Dispositivos de navegación al aire libre
+   - Control de altitud de drones
+
+## Seguridad y Cumplimiento
+
+### Certificaciones
+- **RoHS**: Cumple con directiva de la UE
+- **REACH**: Cumple con regulación de la UE
+- **CE**: Compatibilidad electromagnética
+
+### Características de Seguridad
+- **Protección ESD**: ±2kV HBM en todos los pines
+- **Protección de Polaridad Inversa**: Integrada
+- **Protección Térmica**: Monitoreo de rango de operación
+
+## Referencias
+
+- [Hoja de Datos ICP-10111](https://product.tdk.com/system/files/dam/doc/product/sensor/pressure/capacitive-pressure/data_sheet/ds-000177-icp-10111-v1.3.pdf)
+- [Hoja de Datos BME688](https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme688-ds000.pdf)
+- [Hoja de Datos Regulador ME6206](https://www.microne.com.cn/uploads/file/20200904/ME6206.pdf)
+
+## Información de Pedidos
+
+| Número de Parte | Descripción | Empaque | MOQ |
+|-----------------|-------------|---------|-----|
+| ICP10111-001 | Módulo Estándar | Individual | 1 |
+| ICP10111-DEV | Kit de Desarrollo | Caja de Kit | 1 |
+| ICP10111-BULK | Pedido en Lote | Bandeja | 100 |
 
 ## Características Físicas
 
