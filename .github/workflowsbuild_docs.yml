@@ -2,5 +2,8 @@
   run: |
     sudo apt-get update
     sudo apt-get install -y pandoc texlive-latex-extra
-    pandoc content.md -o datasheet.pdf --template=template.tex
-
+    pandoc content.md -o datasheet.pdf \
+      --template=template.tex \
+      --metadata title="DevLab Embedded Module" \
+      --metadata author="UNIT DevLab Team" \
+      --metadata date="2025-07-18"
