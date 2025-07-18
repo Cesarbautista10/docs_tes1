@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: pandoc/latex:latest  # ✅ Contenedor con Pandoc + TeX Live preinstalado
+      image: pandoc/latex:latest
 
     steps:
     - name: Checkout code
@@ -30,10 +30,16 @@ jobs:
           --template=template.tex \
           --pdf-engine=xelatex
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: DevLab PDFs
-        path: |
-          devlab_en.pdf
-          devlab_es.pdf
+    - name: Move PDFs to docs/
+      run: |
+        mkdir -p docs
+        mv devlab_en.pdf docs/
+        mv devlab_es.pdf docs/
+
+    - name: Commit and push updated PDFs to docs/
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add docs/
+        git commit -m "chore: update DevLab PDFs in docs/" || echo "No changes to commit"
+        git push
