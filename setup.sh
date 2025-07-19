@@ -69,9 +69,9 @@ fi
 # Install Python dependencies
 print_status "Installing Python dependencies..."
 if command -v pip3 &> /dev/null; then
-    pip3 install --user PyYAML
+    pip3 install --user -r requirements.txt
 else
-    pip install --user PyYAML
+    pip install --user -r requirements.txt
 fi
 
 if python3 -c "import yaml" 2>/dev/null; then
