@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.20)  18 JUL 2025 17:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.20)  18 JUL 2025 17:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -914,11 +914,11 @@ Package rerunfilecheck Info: File `datasheet_es.out' has not changed.
 (rerunfilecheck)             Checksum: E9769B2EF0CC48EC2FA66EC7C805D24F;6853.
  ) 
 Here is how much of TeX's memory you used:
- 17068 strings out of 474222
- 279259 string characters out of 5748733
+ 17070 strings out of 474222
+ 279283 string characters out of 5748733
  1934975 words of memory out of 5000000
  38949 multiletter control sequences out of 15000+600000
- 615758 words of font info for 104 fonts, out of 8000000 for 9000
+ 615855 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,10n,79p,1009b,542s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
@@ -926,7 +926,7 @@ pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/pu
 blic/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/sha
 re/texmf/fonts/type1/public/lm/lmsy7.pfb>
-Output written on datasheet_es.pdf (12 pages, 2217524 bytes).
+Output written on datasheet_es.pdf (12 pages, 2217325 bytes).
 PDF statistics:
  312 PDF objects out of 1000 (max. 8388607)
  270 compressed objects within 3 object streams
