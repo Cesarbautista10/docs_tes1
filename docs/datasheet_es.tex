@@ -8,24 +8,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{textcomp}
-\usepackage{amsma% Pie de página
-\fancyfoot[L]{\small UNIT Electronics - Development}
-\fancyfoot[C]{\small 2025-07-21}
-\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
-
-% Línea en encabezado y pie
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-
-% Estilo para primera página de cada sección
-\fancypagestyle{plain}{
-    \fancyhf{}
-    \fancyfoot[L]{\small UNIT Electronics - Development}
-    \fancyfoot[C]{\small 2025-07-21}
-    \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0.4pt}
-}ssymb}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{gensymb}
 
 % Soporte para idiomas (español e inglés)
@@ -64,6 +48,29 @@
 \tcbuselibrary{most}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+
+% Configuración de encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{} % Limpiar encabezados y pies
+
+% Pie de página
+\fancyfoot[L]{\small UNIT Electronics - Development}
+\fancyfoot[C]{\small 2025-07-21}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+
+% Línea en encabezado y pie
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Estilo para primera página de cada sección
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\small UNIT Electronics - Development}
+    \fancyfoot[C]{\small 2025-07-21}
+    \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
 
 % Configuración de listings para código
 \lstset{
@@ -107,7 +114,7 @@
     % Logo y información corporativa
     \begin{minipage}{0.3\textwidth}
         \centering
-        $if(logo)$
+        
         \includegraphics[width=\textwidth]{logo.png}
         
     \end{minipage}
@@ -181,7 +188,7 @@
     \hline
     \textbf{Document Type} & Technical Datasheet \\
     \hline
-    \textbf{Classification} & Development Documentation \\
+    \textbf{Classification} & Documentación de Desarrollo \\
     \hline
     \textbf{Project Phase} & Prototype \& Development \\
     \hline
@@ -305,9 +312,9 @@
 \pagestyle{fancy}
 \fancyhf{} % Limpiar encabezados y pies de página
 
-% Encabezado
-\fancyhead[L]{\small \textbf{ICP-10111 Sensor de Presión Barométrica}}
-\fancyhead[C]{\small ICP-10111-001}
+% Encabezado - Solo número de parte para evitar superposición
+\fancyhead[L]{\small \textbf{ICP-10111-001}}
+\fancyhead[C]{}
 \fancyhead[R]{\small Rev. Rev. 1.0}
 
 % Pie de página
@@ -347,6 +354,106 @@
 \newpage
 
 
+
+
+% Sección de Licencia de Hardware
+
+\section*{Hardware License Information}
+\addcontentsline{toc}{section}{Hardware License Information}
+
+\begin{tcolorbox}[
+    colback=green!5!white,
+    colframe=green!50!black,
+    title=Open Source Hardware License,
+    fonttitle=\bfseries
+]
+
+\textbf{License Type:} Hardware de Código Abierto\\[0.2cm]
+\textbf{License:} Licencia MIT\\[0.2cm]
+\textbf{Copyright:} Copyright (c) 2025 UNIT Electronics\\[0.2cm]
+
+\textbf{Description:} Este diseño de hardware se libera bajo la Licencia MIT
+
+\vspace{0.3cm}
+\textbf{Permissions:}
+\begin{itemize}
+    \item Commercial Use: Uso comercial permitido
+    \item Modification: Modificación permitida
+    \item Distribution: Distribución permitida
+\end{itemize}
+
+\textbf{Requirements:}
+\begin{itemize}
+    \item Attribution: Se requiere atribución para trabajos derivados
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item Warranty: Sin garantía proporcionada
+\end{itemize}
+
+\end{tcolorbox}
+\newpage
+
+
+% Sección de Estándares de Diseño IPC
+
+\section*{Design Standards \& IPC Guidelines}
+\addcontentsline{toc}{section}{Design Standards \& IPC Guidelines}
+
+\begin{tcolorbox}[
+    colback=blue!5!white,
+    colframe=blue!50!black,
+    title=IPC Standards Reference,
+    fonttitle=\bfseries
+]
+
+This hardware design follows industry-standard IPC guidelines and best practices:
+
+\vspace{0.3cm}
+\textbf{PCB Design Standards:}
+\begin{itemize}
+    \item IPC-2221 - Estándar Genérico para Diseño de Placas Impresas
+    \item IPC-2152 - Estándar para Determinar Capacidad de Corriente en Diseño de PCB
+\end{itemize}
+
+\textbf{Assembly Standards:}
+\begin{itemize}
+    \item IPC-A-610 - Aceptabilidad de Ensambles Electrónicos
+    \item IPC-J-STD-001 - Requisitos para Ensambles Eléctricos y Electrónicos Soldados
+\end{itemize}
+
+\textbf{Component Standards:}
+\begin{itemize}
+    \item IPC-7351 - Requisitos Genéricos para Diseño de Montaje Superficial
+\end{itemize}
+
+\textbf{Testing Standards:}
+\begin{itemize}
+    \item IPC-TM-650 - Manual de Métodos de Prueba
+\end{itemize}
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+\begin{tcolorbox}[
+    colback=orange!5!white,
+    colframe=orange!50!black,
+    title=Compliance Status (Development Phase),
+    fonttitle=\bfseries
+]
+
+\textbf{Environmental Compliance:}
+\begin{itemize}
+    \item RoHS: Diseño preparado para cumplimiento RoHS
+    \item REACH: Selección de materiales siguiendo directrices REACH
+    \item Lead-Free: Compatible con proceso de ensamble libre de plomo
+\end{itemize}
+
+\textbf{Note:} Etapa de desarrollo - pruebas en progreso
+
+\end{tcolorbox}
+\newpage
 
 
 % Contenido principal del documento

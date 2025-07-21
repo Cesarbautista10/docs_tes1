@@ -8,6 +8,7 @@ import re
 import yaml
 import shutil
 import subprocess
+from datetime import datetime
 import argparse
 from pathlib import Path
 from typing import Dict, List
@@ -428,49 +429,57 @@ class LatexDocGenerator:
     def process_template(self, template: str, metadata: Dict) -> str:
         """Procesa template con soporte completo para condicionales Pandoc"""
         
-        # Procesar condicionales $if(variable)$...$else$...$endif$
-        def replace_conditional(match):
-            full_match = match.group(0)
-            var_name = match.group(1)
+        # Función para procesar condicionales de forma recursiva
+        def process_conditionals(text):
+            # Patrón para encontrar condicionales completos (incluyendo else opcional)
+            pattern = r'\$if\(([^)]+)\)\$(.*?)(?:\$else\$(.*?))?\$endif\$'
             
-            # Extraer contenido if, else (opcional) y endif
-            if_content = ""
-            else_content = ""
+            def replace_conditional(match):
+                var_name = match.group(1)
+                if_content = match.group(2) or ""
+                else_content = match.group(3) or ""
+                
+                # Decidir qué contenido usar
+                if var_name in metadata and metadata[var_name]:
+                    result = if_content
+                else:
+                    result = else_content
+                
+                # Procesar condicionales anidados en el resultado
+                return process_conditionals(result)
             
-            # Buscar el contenido entre $if(var)$ y $else$ o $endif$
-            if_start = full_match.find(f'$if({var_name})$') + len(f'$if({var_name})$')
+            # Mientras haya condicionales, seguir procesando
+            while re.search(pattern, text, re.DOTALL):
+                text = re.sub(pattern, replace_conditional, text, flags=re.DOTALL)
             
-            if '$else$' in full_match:
-                else_pos = full_match.find('$else$')
-                if_content = full_match[if_start:else_pos]
-                else_start = else_pos + len('$else$')
-                endif_pos = full_match.rfind('$endif$')
-                else_content = full_match[else_start:endif_pos]
-            else:
-                endif_pos = full_match.rfind('$endif$')
-                if_content = full_match[if_start:endif_pos]
-            
-            # Decidir qué contenido usar basado en si la variable existe y no está vacía
-            if var_name in metadata and metadata[var_name]:
-                return if_content
-            else:
-                return else_content
+            return text
         
-        # Procesar condicionales complejos primero
-        template = re.sub(
-            r'\$if\(([^)]+)\)\$(.*?)\$endif\$',
-            replace_conditional,
-            template,
-            flags=re.DOTALL
-        )
+        # Procesar condicionales
+        template = process_conditionals(template)
         
-        # Procesar condicionales con else
-        template = re.sub(
-            r'\$if\(([^)]+)\)\$(.*?)\$else\$(.*?)\$endif\$',
-            replace_conditional,
-            template,
-            flags=re.DOTALL
-        )
+        # Función para obtener valor anidado de un diccionario
+        def get_nested_value(data, key_path):
+            """Obtiene valor anidado usando notación de punto"""
+            keys = key_path.split('.')
+            value = data
+            try:
+                for key in keys:
+                    if isinstance(value, dict) and key in value:
+                        value = value[key]
+                    else:
+                        return None
+                return value
+            except:
+                return None
+        
+        # Reemplazar variables anidadas primero (ej: hardware_license.type)
+        nested_pattern = r'\$([a-zA-Z_][a-zA-Z0-9_]*\.[a-zA-Z_][a-zA-Z0-9_.]*)\$'
+        def replace_nested(match):
+            key_path = match.group(1)
+            value = get_nested_value(metadata, key_path)
+            return str(value) if value is not None else f"${key_path}$"
+        
+        template = re.sub(nested_pattern, replace_nested, template)
         
         # Reemplazar variables simples
         for key, value in metadata.items():
@@ -478,6 +487,19 @@ class LatexDocGenerator:
                 template = template.replace(f'${key}$', str(value))
         
         # Limpiar variables no definidas (reemplazar con valores por defecto)
+        default_values = {
+            'title': 'Hardware Module Documentation',
+            'partnumber': 'HW-XXXXX-001',
+            'version': 'Rev. 1.0',
+            'date': datetime.now().strftime('%Y-%m-%d'),
+            'author': 'Development Team',
+            'organization': 'UNIT Electronics'
+        }
+        
+        for var, default in default_values.items():
+            template = template.replace(f'${var}$', default)
+        
+        return template
         default_values = {
             'title': 'Hardware Documentation',
             'subtitle': 'Technical Specifications',

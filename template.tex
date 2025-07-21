@@ -8,24 +8,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{textcomp}
-\usepackage{amsma% Pie de página
-\fancyfoot[L]{\small $if(organization)$$organization$$else$UNIT Electronics$endif$ - Development}
-\fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
-\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
-
-% Línea en encabezado y pie
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.4pt}
-
-% Estilo para primera página de cada sección
-\fancypagestyle{plain}{
-    \fancyhf{}
-    \fancyfoot[L]{\small $if(organization)$$organization$$else$UNIT Electronics$endif$ - Development}
-    \fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
-    \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
-    \renewcommand{\headrulewidth}{0pt}
-    \renewcommand{\footrulewidth}{0.4pt}
-}ssymb}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{gensymb}
 
 % Soporte para idiomas (español e inglés)
@@ -64,6 +48,29 @@
 \tcbuselibrary{most}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+
+% Configuración de encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{} % Limpiar encabezados y pies
+
+% Pie de página
+\fancyfoot[L]{\small $if(organization)$$organization$$else$UNIT Electronics$endif$ - Development}
+\fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+
+% Línea en encabezado y pie
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Estilo para primera página de cada sección
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\small $if(organization)$$organization$$else$UNIT Electronics$endif$ - Development}
+    \fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
+    \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
 
 % Configuración de listings para código
 \lstset{
@@ -311,9 +318,9 @@ $if(title)$
 \pagestyle{fancy}
 \fancyhf{} % Limpiar encabezados y pies de página
 
-% Encabezado
-\fancyhead[L]{\small \textbf{$title$}}
-\fancyhead[C]{\small $if(partnumber)$$partnumber$$else$ICP-10111$endif$}
+% Encabezado - Solo número de parte para evitar superposición
+\fancyhead[L]{\small \textbf{$if(partnumber)$$partnumber$$else$ICP-10111$endif$}}
+\fancyhead[C]{}
 \fancyhead[R]{\small Rev. $if(version)$$version$$else$1.0$endif$}
 
 % Pie de página
@@ -353,6 +360,106 @@ $if(lot)$
 \newpage
 $endif$
 
+$endif$
+
+% Sección de Licencia de Hardware
+$if(hardware_license)$
+\section*{Hardware License Information}
+\addcontentsline{toc}{section}{Hardware License Information}
+
+\begin{tcolorbox}[
+    colback=green!5!white,
+    colframe=green!50!black,
+    title=Open Source Hardware License,
+    fonttitle=\bfseries
+]
+
+\textbf{License Type:} $hardware_license.type$\\[0.2cm]
+\textbf{License:} $hardware_license.license$\\[0.2cm]
+\textbf{Copyright:} $hardware_license.copyright$\\[0.2cm]
+
+\textbf{Description:} $hardware_license.description$
+
+\vspace{0.3cm}
+\textbf{Permissions:}
+\begin{itemize}
+    \item Commercial Use: $hardware_license.commercial_use$
+    \item Modification: $hardware_license.modification$
+    \item Distribution: $hardware_license.distribution$
+\end{itemize}
+
+\textbf{Requirements:}
+\begin{itemize}
+    \item Attribution: $hardware_license.attribution$
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item Warranty: $hardware_license.warranty$
+\end{itemize}
+
+\end{tcolorbox}
+\newpage
+$endif$
+
+% Sección de Estándares de Diseño IPC
+$if(design_standards)$
+\section*{Design Standards \& IPC Guidelines}
+\addcontentsline{toc}{section}{Design Standards \& IPC Guidelines}
+
+\begin{tcolorbox}[
+    colback=blue!5!white,
+    colframe=blue!50!black,
+    title=IPC Standards Reference,
+    fonttitle=\bfseries
+]
+
+This hardware design follows industry-standard IPC guidelines and best practices:
+
+\vspace{0.3cm}
+\textbf{PCB Design Standards:}
+\begin{itemize}
+    \item $design_standards.pcb_design$
+    \item $design_standards.thermal$
+\end{itemize}
+
+\textbf{Assembly Standards:}
+\begin{itemize}
+    \item $design_standards.assembly$
+    \item $design_standards.soldering$
+\end{itemize}
+
+\textbf{Component Standards:}
+\begin{itemize}
+    \item $design_standards.components$
+\end{itemize}
+
+\textbf{Testing Standards:}
+\begin{itemize}
+    \item $design_standards.testing$
+\end{itemize}
+
+\end{tcolorbox}
+
+\vspace{0.5cm}
+\begin{tcolorbox}[
+    colback=orange!5!white,
+    colframe=orange!50!black,
+    title=Compliance Status (Development Phase),
+    fonttitle=\bfseries
+]
+
+\textbf{Environmental Compliance:}
+\begin{itemize}
+    \item RoHS: $compliance_status.rohs$
+    \item REACH: $compliance_status.reach$
+    \item Lead-Free: $compliance_status.lead_free$
+\end{itemize}
+
+\textbf{Note:} $compliance_status.environmental$
+
+\end{tcolorbox}
+\newpage
 $endif$
 
 % Contenido principal del documento
