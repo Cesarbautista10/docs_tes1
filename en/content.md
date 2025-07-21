@@ -14,7 +14,7 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 
 # Hardware
 
-## ⚙️ Technical Specifications
+## Technical Specifications
 
 ### Sensor Specifications
 
@@ -35,9 +35,9 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 | Sleep Current | - | 0.1 | 0.5 | µA | Standby mode |
 | Regulator Output | - | 1.8 | - | V | Internal LDO |
 
-## 🔌 Pinout
+## Pinout
 
-![Pinout Diagram](unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
+![Pinout Diagram](resources/unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
 
 | Pin Label | Function    | Notes                             |
 |-----------|-------------|-----------------------------------|
@@ -46,13 +46,13 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 | SDA       | I2C Data    | Serial data line                  |
 | SCL       | I2C Clock   | Serial clock line                 |
 
-## 📏 Dimensions
+## Dimensions
 
-![Dimensions](unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+![Dimensions](resources/unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
-## 📃 Topology
+## Topology
 
-![Topology](unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+![Topology](resources/unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
 | Ref. | Description                              |
 |------|------------------------------------------|

@@ -160,6 +160,12 @@ fi
 # Test documentation generation
 print_status "Testing documentation generation..."
 
+# Clean previous builds first
+print_status "Cleaning previous build artifacts..."
+rm -rf docs/*.pdf docs/*.tex docs/*.log docs/*.aux docs/*.out docs/*.toc docs/*.lof docs/*.lot 2>/dev/null || true
+rm -rf docs/*_*.png docs/*_*.jpg docs/*_*.jpeg 2>/dev/null || true
+print_success "Build directory cleaned"
+
 echo ""
 echo "🧪 Testing English documentation..."
 if python3 generate_final.py --lang en; then

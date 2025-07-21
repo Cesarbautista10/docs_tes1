@@ -57,6 +57,13 @@ jobs:
           librsvg2-bin \
           inkscape
     
+    - name: 🧹 Clean Previous Build
+      run: |
+        echo "🧹 Cleaning previous build artifacts..."
+        rm -rf docs/*.pdf docs/*.tex docs/*.log docs/*.aux docs/*.out docs/*.toc docs/*.lof docs/*.lot
+        rm -rf docs/*_*.png docs/*_*.jpg docs/*_*.jpeg
+        echo "✅ Build directory cleaned"
+    
     - name: 🔍 Verify Dependencies
       run: |
         python --version
@@ -66,12 +73,14 @@ jobs:
     
     - name: 📖 Generate Documentation - English
       run: |
+        echo "🇺🇸 Generating English documentation..."
         python generate_final.py --lang en
         echo "✅ English documentation generated"
       continue-on-error: false
     
     - name: 📖 Generate Documentation - Spanish
       run: |
+        echo "🇪🇸 Generating Spanish documentation..."
         python generate_final.py --lang es
         echo "✅ Spanish documentation generated"
       continue-on-error: false

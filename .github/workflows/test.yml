@@ -44,6 +44,13 @@ jobs:
           texlive-latex-extra \
           texlive-lang-spanish
     
+    - name: 🧹 Clean Previous Build
+      run: |
+        echo "🧹 Cleaning previous build artifacts..."
+        rm -rf docs/*.pdf docs/*.tex docs/*.log docs/*.aux docs/*.out docs/*.toc docs/*.lof docs/*.lot
+        rm -rf docs/*_*.png docs/*_*.jpg docs/*_*.jpeg
+        echo "✅ Build directory cleaned"
+    
     - name: 📖 Test Documentation Generation
       run: |
         echo "🧪 Testing ${{ matrix.language }} documentation generation..."

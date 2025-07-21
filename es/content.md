@@ -14,7 +14,7 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 
 # Hardware
 
-## ⚙️ Especificaciones Técnicas
+## Especificaciones Técnicas
 
 ### Especificaciones del Sensor
 
@@ -35,9 +35,9 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 | Corriente en Reposo | - | 0.1 | 0.5 | µA | Modo standby |
 | Salida del Regulador | - | 1.8 | - | V | LDO interno |
 
-## 🔌 Distribución de Pines
+## Distribución de Pines
 
-![Diagrama de Pines](unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
+![Diagrama de Pines](resources/unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
 
 | Etiqueta | Función | Notas |
 |----------|---------|-------|
@@ -46,13 +46,13 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 | SDA | Datos I2C | Línea de datos serie |
 | SCL | Reloj I2C | Línea de reloj serie |
 
-## 📏 Dimensiones
+## Dimensiones
 
-![Dimensiones](unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+![Dimensiones](resources/unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
-## 📃 Topología
+## Topología
 
-![Topología](unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+![Topología](resources/unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
 
 | Ref. | Descripción |
 |------|-------------|
@@ -154,90 +154,6 @@ El módulo ICP-10111 es ideal para:
 | ICP10111-001 | Módulo Estándar | Individual | 1 |
 | ICP10111-DEV | Kit de Desarrollo | Caja de Kit | 1 |
 | ICP10111-BULK | Pedido en Lote | Bandeja | 100 |
-
-## Características Físicas
-
-![Dimensiones Físicas](resources/unit_dimension_v_1_0_0_icp10111_barometric_pressure_sensor.png)
-
-![Vista Superior](resources/unit_top_v_1_0_0_icp10111_barometric_pressure_sensor.png)
-
-![Vista Inferior](resources/unit_btm_v_1_0_0_icp10111_barometric_pressure_sensor.png)
-
-### Información del Encapsulado
-
-| Parámetro | Valor | Unidad |
-|-----------|-------|--------|
-| Tipo de Encapsulado | QFN-48 | - |
-| Dimensiones | 6 x 6 x 0.9 | mm |
-| Separación de Pines | 0.4 | mm |
-| Peso | 0.5 | g |
-
-### Especificaciones Ambientales
-
-| Parámetro | Mín | Máx | Unidad | Condiciones |
-|-----------|-----|-----|--------|-------------|
-| Temperatura de Operación | -40 | +85 | °C | Grado comercial |
-| Temperatura de Almacenamiento | -55 | +125 | °C | - |
-| Humedad | 10 | 95 | %HR | Sin condensación |
-
-## Soporte de Software
-
-### Entorno de Desarrollo
-- **Arduino IDE**: Soporte completo con núcleo ESP32
-- **ESP-IDF**: Framework nativo de Espressif
-- **PlatformIO**: Soporte IDE multiplataforma
-- **MicroPython**: Soporte Python para desarrollo rápido
-
-### Librerías Principales
-- Conectividad WiFi & Bluetooth
-- Sistema operativo en tiempo real FreeRTOS
-- Capa de abstracción de hardware (HAL)
-- Soporte de actualización por aire (OTA)
-
-## Aplicaciones
-
-El módulo DevLab es ideal para:
-
-1. **Sensores y Actuadores IoT**
-   - Monitoreo ambiental
-   - Dispositivos domóticos
-   - Automatización industrial
-
-2. **Prototipado y Desarrollo**
-   - Pruebas de concepto rápidas
-   - Proyectos educativos
-   - Aplicaciones de investigación
-
-3. **Productos Comerciales**
-   - Electrodomésticos inteligentes
-   - Dispositivos vestibles
-   - Iluminación conectada
-
-## Seguridad y Cumplimiento
-
-### Certificaciones
-- **FCC**: Parte 15.247 (USA)
-- **CE**: EN 300 328, EN 301 489 (Europa)
-- **IC**: RSS-210 (Canadá)
-
-### Características de Seguridad
-- **Protección ESD**: ±2kV HBM en todos los pines
-- **Inmunidad Latch-up**: ±100mA
-- **Protección Térmica**: Apagado térmico automático
-
-## Información de Pedidos
-
-| Número de Parte | Descripción | Empaque | MOQ |
-|-----------------|-------------|---------|-----|
-| DEVLAB-001 | Módulo Estándar | Bandeja | 100 |
-| DEVLAB-001R | Compatible RoHS | Tape & Reel | 1000 |
-| DEVLAB-DEV | Kit de Desarrollo | Caja Individual | 1 |
-
-## Historial de Revisiones
-
-| Versión | Fecha | Cambios |
-|---------|-------|---------|
-| 1.0 | 2025-07-18 | Lanzamiento inicial |
 
 ## Esquemáticos
 
