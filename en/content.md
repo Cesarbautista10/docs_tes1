@@ -1,22 +1,38 @@
-# Hardware Documentation
+# 1. SCOPE AND PURPOSE
 
-## Overview
+## 1.1 Document Scope
 
-The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor with integrated environmental monitoring capabilities, designed for IoT applications and precise atmospheric measurements.
+This technical datasheet provides comprehensive specifications, electrical characteristics, mechanical dimensions, and application guidelines for the ICP-10111 Barometric Pressure Sensor module. This document is intended for design engineers, system integrators, and technical personnel involved in the development and integration of environmental sensing solutions.
 
-## Features
+## 1.2 Product Overview
 
-- **ICP-10111 Pressure Sensor** (High precision)
-- **BME688 Environmental Sensor** (Temperature, humidity, gas)
-- **Low power consumption** modes
-- **I2C/QWIIC connectivity**
-- **Compact form factor** with castellated holes
+The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor with integrated environmental monitoring capabilities, designed for IoT applications and precise atmospheric measurements. The module combines high-accuracy pressure sensing with auxiliary environmental monitoring capabilities in a compact, easy-to-integrate form factor.
 
-# Hardware
+## 1.3 Key Features
 
-## Technical Specifications
+- **ICP-10111 Pressure Sensor** - High precision barometric pressure measurement
+- **BME688 Environmental Sensor** - Temperature, humidity, and gas sensing capabilities  
+- **Low Power Consumption** - Optimized for battery-powered applications
+- **I2C/QWIIC Connectivity** - Standard digital interface with plug-and-play connector
+- **Compact Form Factor** - PCB with castellated holes for flexible mounting options
+- **Industrial Temperature Range** - -40°C to +85°C operation
+- **RoHS Compliant** - Lead-free manufacturing process
 
-### Sensor Specifications
+# 2. TECHNICAL SPECIFICATIONS
+
+## 2.1 Absolute Maximum Ratings
+
+| Parameter | Symbol | Min | Max | Unit | Notes |
+|-----------|--------|-----|-----|------|-------|
+| Supply Voltage | VDD | -0.3 | 6.0 | V | Beyond operating range |
+| Storage Temperature | TSTG | -55 | +125 | °C | Non-operating |
+| Pressure Range (Absolute) | PABS | 0 | 1500 | hPa | Mechanical limit |
+
+**WARNING:** Stresses beyond those listed under "Absolute Maximum Ratings" may cause permanent damage to the device. Exposure to absolute maximum rating conditions for extended periods may affect device reliability.
+
+## 2.2 Recommended Operating Conditions
+
+### 2.2.1 Sensor Specifications
 
 | Parameter | Value | Unit | Notes |
 |-----------|-------|------|-------|

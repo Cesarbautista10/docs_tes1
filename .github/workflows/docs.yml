@@ -69,6 +69,18 @@ jobs:
         echo "📁 Preparing images and resources..."
         mkdir -p docs/resources
         
+        # Copy logo files first
+        if [ -f "images/logo.png" ]; then
+          cp images/logo.png docs/
+          echo "✅ Logo copied to docs/"
+        elif [ -f "images/logo.jpg" ]; then
+          cp images/logo.jpg docs/
+          echo "✅ Logo (JPG) copied to docs/"
+        elif [ -f "images/logo.jpeg" ]; then
+          cp images/logo.jpeg docs/
+          echo "✅ Logo (JPEG) copied to docs/"
+        fi
+        
         # Copy all images from images/resources/ to docs/resources/
         if [ -d "images/resources" ]; then
           cp -r images/resources/* docs/resources/ 2>/dev/null || echo "No images to copy"

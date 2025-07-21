@@ -8,8 +8,24 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{textcomp}
-\usepackage{amsmath}
-\usepackage{amssymb}
+\usepackage{amsma% Pie de página
+\fancyfoot[L]{\small $if(organization)$$organization$$else$UNIT Electronics$endif$ - Development}
+\fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+
+% Línea en encabezado y pie
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Estilo para primera página de cada sección
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\small $if(organization)$$organization$$else$UNIT Electronics$endif$ - Development}
+    \fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
+    \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}ssymb}
 \usepackage{gensymb}
 
 % Soporte para idiomas (español e inglés)
@@ -41,6 +57,13 @@
 \usepackage{fancyvrb}
 \usepackage{listings}
 \usepackage{xcolor}
+
+% Paquetes para diseño profesional
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\tcbuselibrary{most}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
 
 % Configuración de listings para código
 \lstset{
@@ -74,45 +97,243 @@
 \begin{document}
 
 $if(title)$
-% Página de título
+% Página de título estandarizada IEEE/ISO
 \begin{titlepage}
     \centering
-    \vspace*{2cm}
     
-    % Logo o imagen si existe
-    $if(logo)$
-    \includegraphics[width=0.3\textwidth]{$logo$}\\[2cm]
-    $endif$
+    % Header corporativo estandarizado
+    \vspace*{0.5cm}
     
-    % Título principal
-    {\Huge \textbf{$title$}}\\[1.5em]
+    % Logo y información corporativa
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        $if(logo)$
+        \includegraphics[width=\textwidth]{$logo$}
+        $else$
+        \includegraphics[width=\textwidth]{logo.png}
+        $endif$
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.6\textwidth}
+        \raggedleft
+        {\small \textbf{$if(organization)$$organization$$else$UNIT Electronics$endif$}}\\
+        {\footnotesize Technical Documentation}\\
+        {\footnotesize Development Project - Prototype Phase}
+    \end{minipage}
     
-    % Subtítulo si existe
+    \vspace{0.5cm}
+    
+    % Línea divisoria principal
+    {\color{blue}\rule{\textwidth}{2pt}}
+    
+    \vspace{1.5cm}
+    
+    % Clasificación del documento
+    \begin{tcolorbox}[
+        colback=blue!5!white,
+        colframe=blue!75!black,
+        width=0.9\textwidth,
+        arc=2mm,
+        boxrule=1.5pt,
+        halign=center
+    ]
+    {\Large \textbf{TECHNICAL DATASHEET}}\\[0.2cm]
+    {\normalsize Hardware Documentation \& Development Specifications}
+    \end{tcolorbox}
+    
+    \vspace{0.8cm}
+    
+    % Título principal estandarizado
+    {\Huge \textbf{\textcolor{blue}{$title$}}}\\[0.3cm]
+    
+    % Subtítulo técnico
     $if(subtitle)$
-    {\Large $subtitle$}\\[1em]
+    {\LARGE \textcolor{gray}{$subtitle$}}\\[0.5cm]
+    $else$
+    {\LARGE \textcolor{gray}{High-Precision Sensor Module}}\\[0.5cm]
     $endif$
     
-    % Autor
+    % Código de parte y versión
+    \begin{tcolorbox}[
+        colback=gray!10!white,
+        colframe=gray!50!black,
+        width=0.7\textwidth,
+        arc=1mm,
+        boxrule=1pt
+    ]
+    \centering
+    \begin{tabular}{l l}
+    \textbf{Part Number:} & $if(partnumber)$$partnumber$$else$ICP-10111-001$endif$ \\
+    \textbf{Revision:} & $if(version)$$version$$else$Rev. 1.0$endif$ \\
+    \textbf{Document Date:} & $if(date)$$date$$else$\today$endif$
+    \end{tabular}
+    \end{tcolorbox}
+    
+    \vspace{1cm}
+    
+    % Tabla de información del documento (Formato simplificado)
+    \begin{tcolorbox}[
+        colback=white,
+        colframe=black,
+        width=0.9\textwidth,
+        arc=0mm,
+        boxrule=1pt,
+        halign=center
+    ]
+    {\normalsize \textbf{DOCUMENT INFORMATION}}\\[0.3cm]
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Document Type} & Technical Datasheet \\
+    \hline
+    \textbf{Classification} & $if(classification)$$classification$$else$Development Documentation$endif$ \\
+    \hline
+    \textbf{Project Phase} & Prototype \& Development \\
+    \hline
     $if(author)$
-    {\large \textit{$author$}}\\[0.5em]
+    \textbf{Technical Author} & $author$ \\
+    \hline
     $endif$
+    \textbf{Review Status} & Draft - Under Development \\
+    \hline
+    \textbf{Distribution} & Internal Development Team \\
+    \hline
+    \end{tabular}
+    \end{tcolorbox}
     
-    % Fecha
-    $if(date)$
-    {\normalsize $date$}
-    $endif$
+    \vspace{0.8cm}
+    
+    % Disclaimers y avisos para proyecto en desarrollo
+    \begin{tcolorbox}[
+        colback=yellow!5!white,
+        colframe=orange!75!black,
+        width=\textwidth,
+        arc=1mm,
+        boxrule=1pt
+    ]
+    \centering
+    {\small \textbf{DEVELOPMENT NOTICE}}\\[0.2cm]
+    {\footnotesize This document describes a prototype hardware module under development.}\\
+    {\footnotesize Specifications are preliminary and subject to change during development process.}\\
+    {\footnotesize Not intended for production use without further validation and testing.}
+    \end{tcolorbox}
     
     \vfill
     
-    % Información adicional al pie
+    % Footer para proyecto de desarrollo
+    \begin{tcolorbox}[
+        colback=blue!10!white,
+        colframe=blue!50!black,
+        width=\textwidth,
+        arc=0mm,
+        boxrule=1pt
+    ]
+    \centering
     $if(organization)$
-    {\small $organization$}\\
+    {\large \textbf{$organization$}}\\[0.1cm]
+    $else$
+    {\large \textbf{UNIT ELECTRONICS}}\\[0.1cm]
     $endif$
-    $if(version)$
-    {\small Versión: $version$}
-    $endif$
+    {\small Hardware Development \& Prototyping}\\
+    {\footnotesize Development Project - Contact: info@unitelectronics.com}\\
+    {\tiny \textit{© 2025 Development documentation - All specifications are preliminary}}
+    \end{tcolorbox}
     
 \end{titlepage}
+
+% Página de información del proyecto
+\begin{titlepage}
+    \vspace*{2cm}
+    
+    \begin{center}
+    {\Large \textbf{PROJECT INFORMATION \& DEVELOPMENT STATUS}}
+    \end{center}
+    
+    \vspace{1cm}
+    
+    % Historial de revisiones simplificado
+    \section*{REVISION HISTORY}
+    \begin{longtable}{|c|c|c|l|}
+    \hline
+    \textbf{Rev.} & \textbf{Date} & \textbf{Author} & \textbf{Description of Changes} \\
+    \hline
+    1.0 & $if(date)$$date$$else$\today$endif$ & $if(author)$$author$$else$Development Team$endif$ & Initial development documentation \\
+    \hline
+    \end{longtable}
+    
+    \vspace{1cm}
+    
+    % Estado del desarrollo
+    \section*{DEVELOPMENT STATUS}
+    \begin{itemize}
+        \item \textbf{Project Phase:} Prototype Development
+        \item \textbf{Hardware Status:} Functional prototype completed
+        \item \textbf{Testing Status:} Basic functionality verified
+        \item \textbf{Documentation:} Preliminary specifications
+        \item \textbf{Certification:} Not yet initiated
+    \end{itemize}
+    
+    \vspace{1cm}
+    
+    % Referencias y objetivos de estándares futuros
+    \section*{FUTURE COMPLIANCE TARGETS}
+    \begin{itemize}
+        \item \textbf{Design Guidelines:} Following IPC-2221 recommendations
+        \item \textbf{Environmental Goals:} RoHS compliance preparation
+        \item \textbf{Safety Considerations:} Basic safety guidelines applied
+        \item \textbf{EMC Preparation:} Layout considerations for future testing
+        \item \textbf{Quality Process:} Development best practices
+    \end{itemize}
+    
+    \vspace{1cm}
+    
+    % Avisos para desarrollo
+    \section*{DEVELOPMENT NOTICES}
+    
+    \textbf{Project Status:}\\
+    This hardware module is currently in the prototype development phase. All specifications and characteristics described in this document are preliminary and based on initial testing and design calculations.
+    
+    \textbf{Disclaimer:}\\
+    The information in this document represents the current state of development and is provided for development team reference only. Specifications may change as the project progresses through design validation and testing phases.
+    
+    \textbf{Usage Notice:}\\
+    This prototype is intended for development, testing, and evaluation purposes only. It is not suitable for production applications without further development, validation, and appropriate certifications.
+    
+    \vfill
+    
+    \begin{center}
+    {\small \textit{This document follows general technical documentation practices}}\\
+    {\small \textit{and represents current development status as of the revision date}}
+    \end{center}
+    
+\end{titlepage}
+
+% Configuración de encabezados y pies de página estandarizados
+\pagestyle{fancy}
+\fancyhf{} % Limpiar encabezados y pies de página
+
+% Encabezado
+\fancyhead[L]{\small \textbf{$title$}}
+\fancyhead[C]{\small $if(partnumber)$$partnumber$$else$ICP-10111$endif$}
+\fancyhead[R]{\small Rev. $if(version)$$version$$else$1.0$endif$}
+
+% Pie de página
+\fancyfoot[L]{\small $if(organization)$$organization$$else$Technical Documentation$endif$}
+\fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
+\fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+
+% Línea en encabezado y pie
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% Estilo para primera página de cada sección
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\small $if(organization)$$organization$$else$Technical Documentation$endif$}
+    \fancyfoot[C]{\small $if(date)$$date$$else$\today$endif$}
+    \fancyfoot[R]{\small Page \thepage\ of \pageref{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+}
 
 % Tabla de contenidos
 $if(toc)$

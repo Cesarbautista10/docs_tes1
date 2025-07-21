@@ -1,9 +1,14 @@
-title: "Sensor de Presión Barométrica ICP-10111"
-subtitle: "Especificaciones Técnicas Completas y Documentación de Hardware"
+title: "ICP-10111 Sensor de Presión Barométrica"
+subtitle: "Módulo Sensor Ambiental de Alta Precisión"
 author: "Equipo de Ingeniería DevLab"
-date: "2025-07-18"
-version: "v1.0"
-organization: "DevLab Electronics"
+date: "2025-07-21"
+version: "Rev. 1.0"
+organization: "UNIT Electronics"
+partnumber: "ICP-10111-001"
+classification: "Development Documentation"
+project_phase: "Prototype Development"
+standards: "Siguiendo guías de diseño IPC-2221"
 toc: true
 lof: true
 lot: true
+logo: "logo.png"

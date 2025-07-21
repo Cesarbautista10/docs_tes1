@@ -22,6 +22,21 @@ class LatexDocGenerator:
         # Crear directorios
         self.docs_dir.mkdir(exist_ok=True)
         self.images_dir.mkdir(exist_ok=True)
+        
+        # Copiar archivos esenciales (logo, etc.)
+        self.copy_essential_files()
+    
+    def copy_essential_files(self):
+        """Copia archivos esenciales como logos"""
+        essential_files = ['logo.png', 'logo.jpg', 'logo.jpeg']
+        
+        for filename in essential_files:
+            source_path = self.images_dir / filename
+            if source_path.exists():
+                dest_path = self.docs_dir / filename
+                shutil.copy2(source_path, dest_path)
+                print(f"✅ Copied {filename} to docs/")
+                break
     
     def find_language_dirs(self) -> List[str]:
         """Encuentra directorios de idiomas"""
@@ -411,13 +426,74 @@ class LatexDocGenerator:
         return '\n'.join(result)
     
     def process_template(self, template: str, metadata: Dict) -> str:
-        """Procesa template"""
-        # Reemplazar variables
-        for key, value in metadata.items():
-            template = template.replace(f'${key}$', str(value))
+        """Procesa template con soporte completo para condicionales Pandoc"""
         
-        # Limpiar condicionales y variables no definidas
-        template = re.sub(r'\$if\([^)]+\)\$.*?\$endif\$', '', template, flags=re.DOTALL)
+        # Procesar condicionales $if(variable)$...$else$...$endif$
+        def replace_conditional(match):
+            full_match = match.group(0)
+            var_name = match.group(1)
+            
+            # Extraer contenido if, else (opcional) y endif
+            if_content = ""
+            else_content = ""
+            
+            # Buscar el contenido entre $if(var)$ y $else$ o $endif$
+            if_start = full_match.find(f'$if({var_name})$') + len(f'$if({var_name})$')
+            
+            if '$else$' in full_match:
+                else_pos = full_match.find('$else$')
+                if_content = full_match[if_start:else_pos]
+                else_start = else_pos + len('$else$')
+                endif_pos = full_match.rfind('$endif$')
+                else_content = full_match[else_start:endif_pos]
+            else:
+                endif_pos = full_match.rfind('$endif$')
+                if_content = full_match[if_start:endif_pos]
+            
+            # Decidir qué contenido usar basado en si la variable existe y no está vacía
+            if var_name in metadata and metadata[var_name]:
+                return if_content
+            else:
+                return else_content
+        
+        # Procesar condicionales complejos primero
+        template = re.sub(
+            r'\$if\(([^)]+)\)\$(.*?)\$endif\$',
+            replace_conditional,
+            template,
+            flags=re.DOTALL
+        )
+        
+        # Procesar condicionales con else
+        template = re.sub(
+            r'\$if\(([^)]+)\)\$(.*?)\$else\$(.*?)\$endif\$',
+            replace_conditional,
+            template,
+            flags=re.DOTALL
+        )
+        
+        # Reemplazar variables simples
+        for key, value in metadata.items():
+            if value is not None:
+                template = template.replace(f'${key}$', str(value))
+        
+        # Limpiar variables no definidas (reemplazar con valores por defecto)
+        default_values = {
+            'title': 'Hardware Documentation',
+            'subtitle': 'Technical Specifications',
+            'author': 'Engineering Team',
+            'date': '2025-07-21',
+            'version': 'Rev. 1.0',
+            'organization': 'DevLab Electronics',
+            'partnumber': 'HW-001',
+            'classification': 'Public Technical Document',
+            'standards': 'IEEE Std 1149.1, IPC-2221'
+        }
+        
+        for key, default_value in default_values.items():
+            template = template.replace(f'${key}$', default_value)
+        
+        # Limpiar cualquier variable restante no procesada
         template = re.sub(r'\$[a-zA-Z_][a-zA-Z0-9_]*\$', '', template)
         
         return template
