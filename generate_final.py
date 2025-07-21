@@ -79,44 +79,66 @@ class LatexDocGenerator:
             alt_text = match.group(1)
             image_path = match.group(2)
             
-            # Buscar imagen en diferentes ubicaciones
-            source_path = None
+            # Buscar imagen en docs/resources/ (ya copiadas por workflow) o docs/
             dest_filename = None
             
-            # Opción 1: path directo desde images/
-            if image_path.startswith('images/'):
-                source_path = self.base_dir / image_path
-                if source_path.exists():
-                    dest_filename = f"{lang_dir}_{source_path.name}"
-            
-            # Opción 2: buscar en images/resources/
-            elif image_path.startswith('resources/') or not image_path.startswith('images/'):
-                # Quitar prefijo resources/ si existe
+            # Opción 1: buscar en docs/resources/ (copiadas por workflow)
+            if image_path.startswith('resources/'):
                 clean_path = image_path.replace('resources/', '')
-                resource_path = self.images_dir / "resources" / clean_path
-                
-                if resource_path.exists():
-                    source_path = resource_path
-                    dest_filename = f"{lang_dir}_{resource_path.name}"
-                else:
-                    # Buscar por nombre parcial en resources
-                    resources_dir = self.images_dir / "resources"
-                    if resources_dir.exists():
-                        for img_file in resources_dir.glob("*"):
-                            if (clean_path.lower() in img_file.name.lower() or 
-                                img_file.stem.lower() in clean_path.lower()):
-                                source_path = img_file
-                                dest_filename = f"{lang_dir}_{img_file.name}"
-                                break
+                docs_resource_path = self.docs_dir / "resources" / clean_path
+                if docs_resource_path.exists():
+                    dest_filename = f"resources/{clean_path}"
             
-            if source_path and source_path.exists():
-                # Copiar imagen al directorio docs
-                dest_path = self.docs_dir / dest_filename
-                shutil.copy2(source_path, dest_path)
+            # Opción 2: buscar por nombre parcial en docs/resources/
+            if not dest_filename:
+                clean_path = image_path.replace('resources/', '').replace('images/', '')
+                docs_resources_dir = self.docs_dir / "resources"
+                if docs_resources_dir.exists():
+                    for img_file in docs_resources_dir.glob("*"):
+                        if (clean_path.lower() in img_file.name.lower() or 
+                            img_file.stem.lower() in clean_path.lower()):
+                            dest_filename = f"resources/{img_file.name}"
+                            break
+            
+            # Opción 3: buscar en docs/ directamente
+            if not dest_filename:
+                clean_path = image_path.replace('resources/', '').replace('images/', '')
+                docs_image_path = self.docs_dir / clean_path
+                if docs_image_path.exists():
+                    dest_filename = clean_path
+            
+            # Opción 4: fallback - copiar desde images/ si workflow no lo hizo
+            if not dest_filename:
+                source_path = None
                 
+                # Buscar en images/resources/
+                if image_path.startswith('resources/') or not image_path.startswith('images/'):
+                    clean_path = image_path.replace('resources/', '')
+                    resource_path = self.images_dir / "resources" / clean_path
+                    
+                    if resource_path.exists():
+                        source_path = resource_path
+                        dest_filename = f"{lang_dir}_{resource_path.name}"
+                    else:
+                        # Buscar por nombre parcial en resources
+                        resources_dir = self.images_dir / "resources"
+                        if resources_dir.exists():
+                            for img_file in resources_dir.glob("*"):
+                                if (clean_path.lower() in img_file.name.lower() or 
+                                    img_file.stem.lower() in clean_path.lower()):
+                                    source_path = img_file
+                                    dest_filename = f"{lang_dir}_{img_file.name}"
+                                    break
+                
+                # Copiar imagen si la encontramos
+                if source_path and source_path.exists():
+                    dest_path = self.docs_dir / dest_filename
+                    shutil.copy2(source_path, dest_path)
+            
+            if dest_filename:
                 # Determinar ancho basado en el tipo de imagen
                 width = "0.8\\textwidth"
-                name_lower = source_path.name.lower()
+                name_lower = dest_filename.lower()
                 
                 if any(keyword in name_lower for keyword in ['pinout', 'pin_out', 'diagram']):
                     width = "0.9\\textwidth"
@@ -132,7 +154,7 @@ class LatexDocGenerator:
 \\centering
 \\includegraphics[width={width}]{{{dest_filename}}}
 \\caption{{{alt_text}}}
-\\label{{fig:{dest_filename.replace('.', '-').replace('_', '-')}}}
+\\label{{fig:{dest_filename.replace('.', '-').replace('_', '-').replace('/', '-')}}}
 \\end{{figure}}
 
 '''
@@ -314,10 +336,27 @@ class LatexDocGenerator:
         # Handle special Unicode characters
         special_chars = {
             'Ω': r'$\Omega$',
-            '°': r'$^{\circ}$',
+            '°': r'\degree',
             '±': r'$\pm$',
             'µ': r'$\mu$',
             '≤': r'$\leq$',
+            '≥': r'$\geq$',
+            '×': r'$\times$',
+            '÷': r'$\div$',
+            '√': r'$\sqrt{}$',
+            '∞': r'$\infty$',
+            'α': r'$\alpha$',
+            'β': r'$\beta$',
+            'γ': r'$\gamma$',
+            'δ': r'$\delta$',
+            'ε': r'$\varepsilon$',
+            'θ': r'$\theta$',
+            'λ': r'$\lambda$',
+            'π': r'$\pi$',
+            'σ': r'$\sigma$',
+            'τ': r'$\tau$',
+            'φ': r'$\phi$',
+            'ω': r'$\omega$',
             '≥': r'$\geq$',
             '×': r'$\times$',
             '÷': r'$\div$',

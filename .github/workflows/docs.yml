@@ -64,12 +64,39 @@ jobs:
         rm -rf docs/*_*.png docs/*_*.jpg docs/*_*.jpeg
         echo "✅ Build directory cleaned"
     
-    - name: 🔍 Verify Dependencies
+    - name: � Prepare Images and Resources
+      run: |
+        echo "📁 Preparing images and resources..."
+        mkdir -p docs/resources
+        
+        # Copy all images from images/resources/ to docs/resources/
+        if [ -d "images/resources" ]; then
+          cp -r images/resources/* docs/resources/ 2>/dev/null || echo "No images to copy"
+          echo "✅ Images copied to docs/resources/"
+          ls -la docs/resources/ || echo "No files in docs/resources/"
+        else
+          echo "⚠️ No images/resources directory found"
+        fi
+        
+        # Also copy individual images if they exist
+        if [ -d "images" ]; then
+          cp images/*.png docs/ 2>/dev/null || echo "No PNG files to copy"
+          cp images/*.jpg docs/ 2>/dev/null || echo "No JPG files to copy"
+          cp images/*.jpeg docs/ 2>/dev/null || echo "No JPEG files to copy"
+        fi
+        
+        echo "📊 Available images after copy:"
+        find docs/ -name "*.png" -o -name "*.jpg" -o -name "*.jpeg" || echo "No image files found"
+    
+    - name: �🔍 Verify Dependencies
       run: |
         python --version
         pdflatex --version
         python -c "import yaml; print('PyYAML OK')"
+        echo "📊 Original images directory:"
         ls -la images/resources/ || echo "No images/resources directory"
+        echo "📊 Copied images in docs:"
+        ls -la docs/resources/ || echo "No docs/resources directory"
     
     - name: 📖 Generate Documentation - English
       run: |
