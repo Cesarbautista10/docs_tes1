@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.20)  21 JUL 2025 10:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.20)  21 JUL 2025 11:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1401,12 +1401,12 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `datasheet_en.out' has not changed.
-(rerunfilecheck)             Checksum: D5AA5F0ECCF9189CA0734E0B5CC7789F;5005.
+(rerunfilecheck)             Checksum: 650284C9CB19AE85AFDF27FC94923D59;4821.
  ) 
 Here is how much of TeX's memory you used:
  34027 strings out of 474222
  669574 string characters out of 5748733
- 1938975 words of memory out of 5000000
+ 1937975 words of memory out of 5000000
  55487 multiletter control sequences out of 15000+600000
  643510 words of font info for 156 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191

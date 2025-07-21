@@ -18,6 +18,8 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 
 ### Especificaciones del Sensor
 
+**Tabla 1: Especificaciones de Rendimiento del Sensor**
+
 | Parámetro | Valor | Unidad | Notas |
 |-----------|-------|--------|-------|
 | Rango de Presión | 300-1250 | hPa | Presión absoluta |
@@ -27,6 +29,8 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 | Interfaz | I2C | - | Compatible QWIIC |
 
 ### Especificaciones de Alimentación
+
+**Tabla 2: Características Eléctricas**
 
 | Parámetro | Mín | Típ | Máx | Unidad | Condiciones |
 |-----------|-----|-----|-----|--------|-------------|
@@ -38,6 +42,8 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 ## Distribución de Pines
 
 ![Diagrama de Pines](resources/unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
+
+**Tabla 3: Configuración de Pines**
 
 | Etiqueta | Función | Notas |
 |----------|---------|-------|
@@ -53,6 +59,8 @@ El módulo sensor de presión barométrica ICP-10111 es un sensor ambiental comp
 ## Topología
 
 ![Topología](resources/unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+
+**Tabla 4: Referencia de Componentes**
 
 | Ref. | Descripción |
 |------|-------------|

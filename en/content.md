@@ -1,14 +1,14 @@
-# 1. SCOPE AND PURPOSE
+# SCOPE AND PURPOSE
 
-## 1.1 Document Scope
+## Document Scope
 
 This technical datasheet provides comprehensive specifications, electrical characteristics, mechanical dimensions, and application guidelines for the ICP-10111 Barometric Pressure Sensor module. This document is intended for design engineers, system integrators, and technical personnel involved in the development and integration of environmental sensing solutions.
 
-## 1.2 Product Overview
+## Product Overview
 
 The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor with integrated environmental monitoring capabilities, designed for IoT applications and precise atmospheric measurements. The module combines high-accuracy pressure sensing with auxiliary environmental monitoring capabilities in a compact, easy-to-integrate form factor.
 
-## 1.3 Key Features
+## Key Features
 
 - **ICP-10111 Pressure Sensor** - High precision barometric pressure measurement
 - **BME688 Environmental Sensor** - Temperature, humidity, and gas sensing capabilities  
@@ -18,9 +18,11 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 - **Industrial Temperature Range** - -40°C to +85°C operation
 - **RoHS Compliant** - Lead-free manufacturing process
 
-# 2. TECHNICAL SPECIFICATIONS
+# TECHNICAL SPECIFICATIONS
 
-## 2.1 Absolute Maximum Ratings
+## Absolute Maximum Ratings
+
+**Table 1: Absolute Maximum Ratings**
 
 | Parameter | Symbol | Min | Max | Unit | Notes |
 |-----------|--------|-----|-----|------|-------|
@@ -30,9 +32,11 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 
 **WARNING:** Stresses beyond those listed under "Absolute Maximum Ratings" may cause permanent damage to the device. Exposure to absolute maximum rating conditions for extended periods may affect device reliability.
 
-## 2.2 Recommended Operating Conditions
+## Recommended Operating Conditions
 
-### 2.2.1 Sensor Specifications
+### Sensor Specifications
+
+**Table 2: Sensor Performance Specifications**
 
 | Parameter | Value | Unit | Notes |
 |-----------|-------|------|-------|
@@ -44,6 +48,8 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 
 ### Power Specifications
 
+**Table 3: Electrical Characteristics**
+
 | Parameter | Min | Typ | Max | Unit | Conditions |
 |-----------|-----|-----|-----|------|------------|
 | Supply Voltage | 3.0 | 3.3 | 5.0 | V | Normal Operation |
@@ -54,6 +60,8 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 ## Pinout
 
 ![Pinout Diagram](resources/unit_pinout_v_0_0_1_ue0094_icp10111_barometric_pressure_sensor_en.jpg)
+
+**Table 4: Pin Configuration**
 
 | Pin Label | Function    | Notes                             |
 |-----------|-------------|-----------------------------------|
@@ -69,6 +77,8 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 ## Topology
 
 ![Topology](resources/unit_topology_v_1_0_0_icp10111_barometric_pressure_sensor.png)
+
+**Table 5: Component Reference**
 
 | Ref. | Description                              |
 |------|------------------------------------------|
@@ -98,6 +108,8 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 
 ### Package Information
 
+**Table 6: Physical Dimensions**
+
 | Parameter | Value | Unit |
 |-----------|-------|------|
 | Package Type | Custom PCB | - |
@@ -106,6 +118,8 @@ The ICP-10111 Barometric Pressure Sensor module is a compact embedded sensor wit
 | Weight | 2.1 | g |
 
 ### Environmental Specifications
+
+**Table 7: Environmental Operating Conditions**
 
 | Parameter | Min | Max | Unit | Conditions |
 |-----------|-----|-----|------|------------|
@@ -167,6 +181,8 @@ The ICP-10111 module is ideal for:
 
 ## Ordering Information
 
+**Table 8: Available Part Numbers**
+
 | Part Number | Description | Package | MOQ |
 |-------------|-------------|---------|-----|
 | ICP10111-001 | Standard Module | Individual | 1 |
@@ -174,6 +190,8 @@ The ICP-10111 module is ideal for:
 | ICP10111-BULK | Bulk Order | Tray | 100 |
 
 ## Revision History
+
+**Table 9: Document Revision History**
 
 | Version | Date | Changes |
 |---------|------|---------|

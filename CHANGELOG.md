@@ -1,5 +1,45 @@
 # 📚 Documentation System Changelog
 
+## v2.0.0 - 2025-07-21
+
+### 🎉 Major Updates
+
+#### New Features
+- **Hardware License Integration**: Open source hardware license support (MIT, GPL, etc.)
+- **IPC Standards Reference**: Comprehensive IPC design standards documentation
+- **Honest Development Documentation**: Realistic project status without false certifications
+- **Improved Table Processing**: Automatic table titles and proper LaTeX captions
+- **Professional Template**: IEEE-inspired formatting adapted for development projects
+
+#### Content Structure Improvements
+- **Automatic Numbering**: Removed manual numbering from content (LaTeX auto-generates)
+- **Table Titles**: Added descriptive titles for all tables
+- **License Sections**: Hardware licensing and compliance information
+- **Design Standards**: IPC guidelines and future compliance targets
+
+#### Technical Enhancements
+- **Template Processing**: Fixed conditional processing for complex variables
+- **Variable Substitution**: Support for nested metadata (e.g., `hardware_license.type`)
+- **Header Optimization**: Eliminated text overlap in page headers
+- **Caption Processing**: Proper extraction and use of table titles
+
+#### Project Cleanup
+- **Removed Unused Files**:
+  - `generate_docs.py`, `generate_simple.py` (old generators)
+  - `docgen.sh`, `setup.sh`, `create_images.sh`, `create_sample_images.sh` (unused scripts)
+  - `README_SISTEMA.md` (redundant documentation)
+  - `devlab_en.pdf`, `devlab_es.pdf` (old PDF outputs)
+  - `.venv/` (should not be in repository)
+- **Added .gitignore**: Proper ignore patterns for build artifacts
+
+### 🔧 Bug Fixes
+- **Conditional Processing**: Fixed `$if(logo)$` appearing in output
+- **Header Layout**: Resolved text superposition in page headers
+- **Table Captions**: All tables now have correct descriptive titles
+- **Template Variables**: Proper handling of nested metadata structures
+
+---
+
 ## v1.0.0 - 2025-07-18
 
 ### 🎉 Initial Release
@@ -72,45 +112,61 @@
   - `actions/deploy-pages@v4` (was v2)
   - `softprops/action-gh-release@v2` (was v1)
 
-### 📄 Documentation Structure
+### 📄 Current Documentation Structure
 
 ```
 ├── 📄 README.md                    # Complete setup and usage guide
-├── 🔧 setup.sh                     # Automated environment setup
-├── 📚 CHANGELOG.md                 # This file
-├── 🐍 generate_final.py            # Main documentation generator
-├── 📝 template.tex                 # LaTeX template
+├──  CHANGELOG.md                 # This changelog file
+├── 🐍 generate_final.py            # Main documentation generator (only generator)
+├── 📝 template.tex                 # Professional LaTeX template
+├── ⚙️  validate_standards.py       # Development standards validator
+├── 📋 document_standards.yaml      # Development project configuration
+├── 🚫 .gitignore                   # Git ignore patterns
+├── 📦 requirements.txt             # Python dependencies
 ├── 🇺🇸 en/                         # English content
-│   ├── content.md                  # Hardware documentation
-│   └── metadata.yaml               # Document metadata
+│   ├── content.md                  # Hardware documentation (auto-numbered)
+│   ├── metadata.yaml               # Document metadata with license info
+│   └── resources/                  # Language-specific images
 ├── 🇪🇸 es/                         # Spanish content
 │   ├── content.md                  # Documentación de hardware
-│   └── metadata.yaml               # Metadatos del documento
-├── 🖼️ images/resources/            # Hardware images
+│   ├── metadata.yaml               # Metadatos con información de licencia
+│   └── resources/                  # Imágenes específicas del idioma
+├── 🖼️  images/                     # Source images
+│   ├── logo.png                    # Company logo
+│   └── resources/                  # Hardware images (referenced by content)
 ├── 🌐 docs/                        # Generated output
-└── ⚙️ .github/workflows/           # CI/CD automation
+│   ├── *.pdf                       # Generated PDFs (versioned)
+│   ├── *.tex                       # Generated LaTeX (ignored)
+│   ├── *.log                       # Build logs (ignored)
+│   └── processed_images            # Copied and processed images
+└── ⚙️  .github/workflows/          # CI/CD automation
     ├── docs.yml                    # Main documentation workflow
     ├── test.yml                    # Pull request testing
-    └── config.yml                  # Configuration settings
+    └── main.yml                    # Legacy workflow
 ```
 
 ### 🚀 Getting Started
 
-1. **Setup Environment**: Run `./setup.sh` for automated setup
-2. **Edit Content**: Modify `en/content.md` and `es/content.md`
-3. **Add Images**: Place images in `images/resources/`
-4. **Generate Docs**: Run `python generate_final.py --lang en`
-5. **Deploy**: Push to main branch for automatic deployment
+1. **Install Dependencies**: `pip install -r requirements.txt`
+2. **Edit Content**: Modify `en/content.md` and `es/content.md` (use auto-numbering)
+3. **Update Metadata**: Edit license and standards in `metadata.yaml` files
+4. **Add Images**: Place images in `images/resources/`
+5. **Generate Docs**: Run `python generate_final.py` (generates both languages)
+6. **Validate**: Run `python validate_standards.py` for development standards check
+7. **Deploy**: Push to main branch for automatic CI/CD deployment
 
-### 🔍 Quality Metrics
+### 🔍 Quality Metrics (v2.0.0)
 
 - **PDF Generation**: ✅ Both languages generate successfully
-- **Image Integration**: ✅ All referenced images included
+- **Image Integration**: ✅ All referenced images included automatically
+- **Table Processing**: ✅ All tables have descriptive titles and proper captions
+- **License Integration**: ✅ Hardware license information included
 - **File Sizes**: 
-  - English PDF: ~2MB
-  - Spanish PDF: ~2MB
+  - English PDF: ~2.1MB
+  - Spanish PDF: ~2.1MB
 - **Build Time**: ~2-3 minutes in CI/CD
-- **Error Rate**: 0% (all warnings resolved)
+- **Error Rate**: 0% (all critical issues resolved)
+- **Template Processing**: ✅ All variables substitute correctly
 
 ### 🎯 Next Steps
 

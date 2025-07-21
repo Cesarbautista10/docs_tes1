@@ -180,7 +180,7 @@ class LatexDocGenerator:
         return re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_image, content)
     
     def process_tables(self, content: str) -> str:
-        """Procesa tablas markdown"""
+        """Procesa tablas markdown con títulos"""
         lines = content.split('\n')
         result = []
         i = 0
@@ -190,6 +190,18 @@ class LatexDocGenerator:
             
             # Detectar tabla
             if '|' in line and i + 1 < len(lines) and '|' in lines[i + 1]:
+                # Buscar título de tabla en las líneas anteriores
+                table_title = None
+                
+                # Buscar hacia atrás hasta 3 líneas para encontrar título
+                for j in range(max(0, i-3), i):
+                    if lines[j].strip().startswith('**Table') or lines[j].strip().startswith('**Tabla'):
+                        table_title = lines[j].strip()
+                        # Remover el título de result si ya fue agregado
+                        if len(result) >= (i - j):
+                            result = result[:-(i - j)]
+                        break
+                
                 table_lines = []
                 j = i
                 
@@ -200,7 +212,7 @@ class LatexDocGenerator:
                     j += 1
                 
                 if len(table_lines) >= 3:
-                    latex_table = self.convert_table(table_lines)
+                    latex_table = self.convert_table(table_lines, table_title)
                     result.append(latex_table)
                     i = j
                 else:
@@ -212,8 +224,8 @@ class LatexDocGenerator:
         
         return '\n'.join(result)
     
-    def convert_table(self, table_lines: List[str]) -> str:
-        """Convierte tabla a LaTeX"""
+    def convert_table(self, table_lines: List[str], table_title: str = None) -> str:
+        """Convierte tabla a LaTeX con título opcional"""
         if len(table_lines) < 3:
             return '\n'.join(table_lines)
         
@@ -243,6 +255,15 @@ class LatexDocGenerator:
         else:
             col_spec = '|' + 'l|' * num_cols
         
+        # Procesar título si existe
+        caption_text = "Technical Specifications"  # Default
+        if table_title:
+            # Extraer el texto del título, removiendo **Table X:** o **Tabla X:**
+            import re
+            title_match = re.search(r'\*\*(?:Table|Tabla)\s+\d+:\s*([^*]+)\*\*', table_title)
+            if title_match:
+                caption_text = title_match.group(1).strip()
+        
         # Generar LaTeX
         latex = f'''
 \\begin{{table}}[H]
@@ -259,10 +280,10 @@ class LatexDocGenerator:
         for row in data_rows:
             latex += ' & '.join(row) + ' \\\\\n'
         
-        latex += '''\\hline
-\\end{tabular}
-\\caption{Especificaciones técnicas}
-\\end{table}
+        latex += f'''\\hline
+\\end{{tabular}}
+\\caption{{{caption_text}}}
+\\end{{table}}
 
 '''
         
